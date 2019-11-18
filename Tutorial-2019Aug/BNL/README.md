@@ -144,7 +144,8 @@ mkdir Interactive-Job
 cd Interactive-Job
 ```
 
-# take one input file in "dset-inside.clist"
+Take one input file in "dset-inside.clist"
+
 ```shell
 inputFile=root://dcgftp.usatlas.bnl.gov:1096/pnfs/usatlas.bnl.gov/LOCALGROUPDISK/rucio/data18_13TeV/da/ea/DAOD_EXOT12.14278917._000001.pool.root.1
 ../bin/Exam_JetsPlot $inputFile > myjob.log 2>&1
@@ -164,7 +165,8 @@ TFile**         myOutputFile.root
   KEY: TH1D     h_mjj_raw;1
 root [2] h_mjj_raw->Draw();
 </blockquote>
-which will yield the plot ![](./plot-BNL-interactive.png)
+which will yield the plot 
+![](./plot-BNL-interactive.png)
 
 
 #### Condor Batch Job Running at BNL
