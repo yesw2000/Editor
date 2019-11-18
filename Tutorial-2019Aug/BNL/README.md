@@ -1,8 +1,10 @@
 ## Running the tutorial example at BNL Tier3
 
 
-<details>
-<summary>Table of Contents</summary>
+## Table of Contents
+<!details>
+<!summary>Table of Contents</summary>
+
 Table of Contents
 =================
 
@@ -15,7 +17,7 @@ Table of Contents
          * [Usage of script pnfs_ls.py](#usage-of-script-pnfs_lspy)
          * [Interactive Job Running at BNL](#interactive-job-running-at-bnl)
          * [Condor Batch Job Running at BNL](#condor-batch-job-running-at-bnl)
-</details>
+<!/details>
 
 
 ### Login to BNL machines
