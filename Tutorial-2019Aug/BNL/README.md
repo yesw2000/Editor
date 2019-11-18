@@ -66,13 +66,13 @@ To get the usage of the single analysis program, run
 bin/Exam_JetsPlot -h
 ```
 You will get
-<blockquote>Usage: bin/Exam_JetsPlot <option(s)> inputRootFile
+<blockquote><pre>Usage: bin/Exam_JetsPlot <option(s)> inputRootFile
 
         A simple example to make a few jet plots
 
 Options:
         -h,--help               Show this help message
-</blockquote>
+</pre></blockquote>
 
 
 #### Dataset Preparation
@@ -179,7 +179,7 @@ ls -l $X509_USER_PROXY    # under local disk /tmp/, we need copy/delegate it to 
 ```
 
 Let us take a look of job description file **test-condor.job**
-<blockquote>
+<blockquote><pre>
 % cat test-condor.job
 universe=vanilla
 
@@ -199,4 +199,4 @@ should_transfer_files=yes
 WhenToTransferOutput=on_exit
 
 queue
-</blockquote>
+</pre></blockquote>
