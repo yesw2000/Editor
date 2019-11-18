@@ -1,20 +1,20 @@
-### Running the tutorial example at BNL Tier3
+## Running the tutorial example at BNL Tier3
 
 **Table of Contents**
 
-[TOCM]
+<details>
+<summary>TOCM</summary>
+</details>
 
-[TOC]
 
-
-#### Login to BNL machines
+### Login to BNL machines
 First you need ssh to spar machines at BNL:
 ```shell
 $ ssh -Y atlasgw
 $ rterm -i
 ```
 
-#### Location of this analysis example package at BNL
+### Location of this analysis example package at BNL
 You can pull the analysis package under the same github repo directory or copy from the directory at BNL:
 
 ```
@@ -33,7 +33,7 @@ where you can find:
 - And the source code of this analysis pacakge under subdir **src/**
 
 
-#### Setup of the Release Env
+### Setup of the Release Env
 First set up the release env by:
 ```
 setupATLAS
@@ -42,7 +42,7 @@ asetup AnalysisBase,21.2.81
 Next time you log in, you can simply run **asetup** under the same dir.
 
 
-#### Package Building
+### Package Building
 To build the single package, just run under that dir:
 ```shell
 cmake src  # generate Makefile
@@ -75,7 +75,7 @@ Options:
 </pre></blockquote>
 
 
-#### Dataset Preparation
+### Dataset Preparation
 
 To run the analysis, we need an input dataset.
 dset=*data18_13TeV.00348885.physics_Main.deriv.DAOD_EXOT12.f937_m1972_p3553_tid14278917_00*
@@ -99,7 +99,7 @@ root://dcgftp.usatlas.bnl.gov:1096//pnfs/usatlas.bnl.gov/LOCALGROUPDISK/rucio/da
 </pre></blockquote>
 
 
-#### Usage of script pnfs_ls.py
+### Usage of script pnfs_ls.py
 
 To get the script pnfs_ls.py usage, just run **pnfs_ls.py -h**:
 <blockquote><pre>% pnfs_ls.py -h
@@ -136,7 +136,7 @@ Options:
 </pre></blockquote>
 
 
-#### Interactive Job Running at BNL
+### Interactive Job Running at BNL
 
 Now we can run the job interactively
 ```shell
@@ -170,7 +170,7 @@ which will yield the plot
 ![](./plot-BNL-interactive.png)
 
 
-#### Condor Batch Job Running at BNL
+### Condor Batch Job Running at BNL
 
 At BNL, the batch queue uses condor system.
 The working directory of Condor batch jobs is different from current 
