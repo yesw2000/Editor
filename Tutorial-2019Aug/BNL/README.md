@@ -17,6 +17,7 @@ This is a shortcut to [Location of this analysis example package at BNL](#locati
 * [Interactive Job Running at BNL](#interactive-job-running-at-bnl)
 * [Condor Batch Job Running at BNL](#condor-batch-job-running-at-bnl)
 
+***
 
 ### Login to BNL machines
 First you need ssh to spar machines at BNL:
@@ -24,6 +25,8 @@ First you need ssh to spar machines at BNL:
 $ ssh -Y atlasgw
 $ rterm -i
 ```
+
+***
 
 ### Location of this analysis example package at BNL
 You can pull the analysis package under the same github repo directory or copy from the directory at BNL:
