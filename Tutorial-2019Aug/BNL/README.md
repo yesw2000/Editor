@@ -2,11 +2,11 @@
 
 
 ## Table of Contents
-<!details>
-<!summary>Table of Contents</summary>
 
 Table of Contents
 =================
+
+This is a shortcut to [Location of this analysis example package at BNL](#location-of-this-analysis-example-package-at-bnl)
 
       * [Running the tutorial example at BNL Tier3](#running-the-tutorial-example-at-bnl-tier3)
          * [Login to BNL machines](#login-to-bnl-machines)
@@ -17,7 +17,6 @@ Table of Contents
          * [Usage of script pnfs_ls.py](#usage-of-script-pnfs_lspy)
          * [Interactive Job Running at BNL](#interactive-job-running-at-bnl)
          * [Condor Batch Job Running at BNL](#condor-batch-job-running-at-bnl)
-<!/details>
 
 
 ### Login to BNL machines
