@@ -89,20 +89,20 @@ pnfs_ls.py $dset --useXRootdOutside -o dset-outside.clist   # for outside access
 ```
 
 Let us look into the generated file dset-inside.clist
-<blockquote>
-% head -5 dset-inside.clist
+`$ head -5 dset-inside.clist`
+<blockquote><pre>
 # clist file for access within BNL
 #site= BNL-OSG2_LOCALGROUPDISK ; dset= data18_13TeV.00348885.physics_Main.deriv.DAOD_EXOT12.f937_m1972_p3553_tid14278917_00
 root://dcgftp.usatlas.bnl.gov:1096//pnfs/usatlas.bnl.gov/LOCALGROUPDISK/rucio/data18_13TeV/da/ea/DAOD_EXOT12.14278917._000001.pool.root.1
 root://dcgftp.usatlas.bnl.gov:1096//pnfs/usatlas.bnl.gov/LOCALGROUPDISK/rucio/data18_13TeV/32/82/DAOD_EXOT12.14278917._000002.pool.root.1
 root://dcgftp.usatlas.bnl.gov:1096//pnfs/usatlas.bnl.gov/LOCALGROUPDISK/rucio/data18_13TeV/86/76/DAOD_EXOT12.14278917._000003.pool.root.1
-</blockquote>
+</pre></blockquote>
 
 
 #### Usage of script pnfs_ls.py
 
 To get the script pnfs_ls.py usage, just run **pnfs_ls.py -h**:
-<blockquote>% pnfs_ls.py -h
+<blockquote><pre>% pnfs_ls.py -h
 Usage: 
      pnfs_ls.py [options] dsetListFile
   or
@@ -133,7 +133,7 @@ Options:
                         xrootd within BNL
   -L LOCALBNLSITE, --localBNLSite=LOCALBNLSITE
                         specify a BNL site, overriding the one choosen by the script
-</blockquote>
+</pre></blockquote>
 
 
 #### Interactive Job Running at BNL
@@ -179,8 +179,8 @@ ls -l $X509_USER_PROXY    # under local disk /tmp/, we need copy/delegate it to 
 ```
 
 Let us take a look of job description file **test-condor.job**
-<blockquote><pre>
-% cat test-condor.job
+> $ cat test-condor.job
+```
 universe=vanilla
 
 output=myjob.out
@@ -199,4 +199,4 @@ should_transfer_files=yes
 WhenToTransferOutput=on_exit
 
 queue
-</pre></blockquote>
+```
