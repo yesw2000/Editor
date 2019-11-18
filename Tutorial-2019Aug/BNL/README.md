@@ -167,7 +167,7 @@ root [2] h_mjj_raw->Draw();
 </blockquote>
 which will yield the plot 
 
-![](https://github.com/yesw2000/Markdown/blob/master/Tutorial-2019Aug/BNL/plot-BNL-interactive.png)
+![](./plot-BNL-interactive.png)
 
 
 #### Condor Batch Job Running at BNL
