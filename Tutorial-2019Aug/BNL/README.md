@@ -1,9 +1,19 @@
 ## Running the tutorial example at BNL Tier3
 
-**Table of Contents**
 
 <details>
-<summary>TOCM</summary>
+<summary>Table of Contents</summary>
+Table of Contents
+=================
+   * [Running the tutorial example at BNL Tier3](#running-the-tutorial-example-at-bnl-tier3)
+      * [Login to BNL machines](#login-to-bnl-machines)
+      * [Location of this analysis example package at BNL](#location-of-this-analysis-example-package-at-bnl)
+      * [Setup of the Release Env](#setup-of-the-release-env)
+      * [Package Building](#package-building)
+      * [Dataset Preparation](#dataset-preparation)
+      * [Usage of script pnfs_ls.py](#usage-of-script-pnfs_lspy)
+      * [Interactive Job Running at BNL](#interactive-job-running-at-bnl)
+      * [Condor Batch Job Running at BNL](#condor-batch-job-running-at-bnl)
 </details>
 
 
