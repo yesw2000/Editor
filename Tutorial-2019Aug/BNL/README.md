@@ -194,7 +194,6 @@ arguments=$(inputFile)
 GetEnv    = True                         # pass the env
 x509userproxy = $ENV(X509_USER_PROXY)    # copy the grid proxy
 
- # this is what turns this feature on
 should_transfer_files=yes
 WhenToTransferOutput=on_exit
 
