@@ -10,6 +10,6 @@ You can find the details at:
 - Running this example at [BNL](./BNL "Running at BNL")
 - Running this example at [SLAC](./SLAC "Running at SLAC")
 
-If you do not care much about turnover speed, you can submit the 
-jobs to the grid. You can find 
-the [brief instruction](./grid/Readme.md "Running at Grid").
+If you do not care much about turnover speed, you can submit 
+the jobs to the grid. 
+You can find the [brief instruction](./grid/Readme.md "Running at Grid").
