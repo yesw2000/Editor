@@ -214,7 +214,7 @@ Please click the filename to see its content
 <details>
 
 <summary>test-condor.job</summary>
-```
+<blockquote><pre>
 universe=vanilla
 
 output=myjob.out
@@ -233,7 +233,7 @@ should_transfer_files=yes
 WhenToTransferOutput=on_exit
 
 queue
-```
+</pre></blockquote>
 </details>
 
 Run the following command to submit the condor job
@@ -313,7 +313,6 @@ to see the output
 <details>
 
 <summary>rucio list-dataset-replicas $dset</summary>
-
 <blockquote><pre>
 DATASET: data16_13TeV:data16_13TeV.00311481.physics_Main.merge.DAOD_SUSY15.f758_m1616_r8669_p3185_tid11525262_00
 +-------------------------------+---------+---------+
