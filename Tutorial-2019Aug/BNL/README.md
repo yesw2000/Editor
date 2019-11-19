@@ -107,7 +107,6 @@ pnfs_ls.py $dset --useXRootdOutside -o dset-outside.clist   # for outside access
 To get the script pnfs_ls.py usage, just run **pnfs_ls.py -h**. 
 
 Please click the following arrow to see the full usage.
-```
 <details>
 
 <summary>pnfs_ls.py -h</summary>
@@ -144,7 +143,6 @@ Options:
                         specify a BNL site, overriding the one choosen by the script
 </pre></blockquote>
 </details>
-```
 
 Let us look into the generated file dset-inside.clist
 `$ head -5 dset-inside.clist`
@@ -207,7 +205,6 @@ ls -l $X509_USER_PROXY    # under local disk /tmp/, we need copy/delegate it to 
 Let us take a look of job description file **test-condor.job**
 
 Please click the following filename to see its content
-```
 <details>
 
 <summary>test-condor.job</summary>
@@ -232,7 +229,6 @@ WhenToTransferOutput=on_exit
 queue
 </pre></blockquote>
 </details>
-```
 
 Run the following command to submit the condor job
 ```shell
@@ -308,7 +304,6 @@ Let us take the same dataset used in the SLAC example.
 
 Please click the following command (where **dset** is defined previously) 
 to see the output
-```
 <details>
 
 <summary>rucio list-dataset-replicas $dset</summary>
@@ -330,7 +325,6 @@ DATASET: data16_13TeV:data16_13TeV.00311481.physics_Main.merge.DAOD_SUSY15.f758_
 +-------------------------------+---------+---------+
 </pre></blockquote>
 </details>
-```
 
 Let us to list the filenames in the dataset
 <blockquote><pre>
