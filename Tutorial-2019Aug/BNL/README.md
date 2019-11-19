@@ -120,10 +120,11 @@ root://dcgftp.usatlas.bnl.gov:1096//pnfs/usatlas.bnl.gov/LOCALGROUPDISK/rucio/da
 ### Usage of script pnfs_ls.py
 
 To get the script pnfs_ls.py usage, just run **pnfs_ls.py -h**. 
+
 Please click the following arrow to see the full usage.
 <details>
 
-<summary>**pnfs_ls.py -h**</summary>
+<summary>pnfs_ls.py -h</summary>
 <blockquote><pre>
 Usage: 
      pnfs_ls.py [options] dsetListFile
@@ -156,7 +157,7 @@ Options:
   -L LOCALBNLSITE, --localBNLSite=LOCALBNLSITE
                         specify a BNL site, overriding the one choosen by the script
 </pre></blockquote>
-<details>
+</details>
 
 ***
 ### Interactive Job Running at BNL
