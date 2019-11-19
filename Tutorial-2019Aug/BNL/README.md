@@ -19,15 +19,6 @@ This is a pulldown menu for the table of contents:
 
 </details>
 
-<details>
-<summary>Heading</summary>
-
-+ markdown list 1
-    + nested list 1
-    + nested list 2
-+ markdown list 2
-
-</details>
 
 ***
 ### Login to BNL machines
@@ -128,8 +119,12 @@ root://dcgftp.usatlas.bnl.gov:1096//pnfs/usatlas.bnl.gov/LOCALGROUPDISK/rucio/da
 ***
 ### Usage of script pnfs_ls.py
 
-To get the script pnfs_ls.py usage, just run **pnfs_ls.py -h**:
-<blockquote><pre>% pnfs_ls.py -h
+To get the script pnfs_ls.py usage, just run **pnfs_ls.py -h**. 
+Please click the following arrow to see the full usage.
+<details>
+
+<summary>**pnfs_ls.py -h**</summary>
+<blockquote><pre>
 Usage: 
      pnfs_ls.py [options] dsetListFile
   or
@@ -161,6 +156,7 @@ Options:
   -L LOCALBNLSITE, --localBNLSite=LOCALBNLSITE
                         specify a BNL site, overriding the one choosen by the script
 </pre></blockquote>
+<details>
 
 ***
 ### Interactive Job Running at BNL
