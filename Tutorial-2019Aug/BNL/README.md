@@ -95,7 +95,9 @@ Options:
 ### Dataset Preparation
 
 To run the analysis, we need an input dataset.
-dset=*data18_13TeV.00348885.physics_Main.deriv.DAOD_EXOT12.f937_m1972_p3553_tid14278917_00*
+```
+dset=data18_13TeV.00348885.physics_Main.deriv.DAOD_EXOT12.f937_m1972_p3553_tid14278917_00
+```
 To list the files in the dataset, set up rucio env and VO-atlas proxy first, 
      then run script pnfs_ls.py to list file path.
 ```shell
@@ -207,7 +209,11 @@ ls -l $X509_USER_PROXY    # under local disk /tmp/, we need copy/delegate it to 
 ```
 
 Let us take a look of job description file **test-condor.job**
-> $ cat test-condor.job
+
+Please click the filename to see its content
+<details>
+
+<summary>test-condor.job</summary>
 ```
 universe=vanilla
 
@@ -228,6 +234,7 @@ WhenToTransferOutput=on_exit
 
 queue
 ```
+</details>
 
 Run the following command to submit the condor job
 ```shell
@@ -300,8 +307,14 @@ Xcache at BNL also supports gLFN (global Logical File Name) access,
 without the need of knowing the exact path of a given filename.
 
 Let us take the same dataset used in the SLAC example.
+
+Please click the following command (where **dset** is defined previously) 
+to see the output
+<details>
+
+<summary>rucio list-dataset-replicas $dset</summary>
+
 <blockquote><pre>
-$ rucio list-dataset-replicas $dset
 DATASET: data16_13TeV:data16_13TeV.00311481.physics_Main.merge.DAOD_SUSY15.f758_m1616_r8669_p3185_tid11525262_00
 +-------------------------------+---------+---------+
 | RSE                           |   FOUND |   TOTAL |
@@ -318,6 +331,7 @@ DATASET: data16_13TeV:data16_13TeV.00311481.physics_Main.merge.DAOD_SUSY15.f758_
 | NET2_DATADISK                 |      39 |      39 |
 +-------------------------------+---------+---------+
 </pre></blockquote>
+</details>
 
 Let us to list the filenames in the dataset
 <blockquote><pre>
