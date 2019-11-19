@@ -107,9 +107,9 @@ pnfs_ls.py $dset --useXRootdOutside -o dset-outside.clist   # for outside access
 To get the script pnfs_ls.py usage, just run **pnfs_ls.py -h**. 
 
 Please click the following arrow to see the full usage.
-<details>
+> <details>
 
-<summary>pnfs_ls.py -h</summary>
+> <summary>pnfs_ls.py -h</summary>
 <blockquote><pre>
 Usage: 
      pnfs_ls.py [options] dsetListFile
@@ -141,8 +141,8 @@ Options:
                         xrootd within BNL
   -L LOCALBNLSITE, --localBNLSite=LOCALBNLSITE
                         specify a BNL site, overriding the one choosen by the script
-</pre></blockquote>
-</details>
+> </pre></blockquote>
+> </details>
 
 Let us look into the generated file dset-inside.clist
 `$ head -5 dset-inside.clist`
