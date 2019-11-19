@@ -1,14 +1,14 @@
-## Running the tutorial example at BNL Tier3
+# Running the tutorial example at BNL Tier3
 
 
 ## Table of Contents
 
 + [Login to BNL machines](#login-to-bnl-machines)
 + [Location of this analysis example package at BNL](#location-of-this-analysis-example-package-at-bnl)
-+ [Setup of the Release Env](#setup-of-the-release-env)
-+ [Package Building](#package-building)
++ [Env Setup and Package Building](#env-setup-and-package-building)
+    + [Setup of the Release Env](#setup-of-the-release-env)
+    + [Package Building](#package-building)
 + [Dataset Preparation](#dataset-preparation)
-+ [Usage of script pnfs_ls.py](#usage-of-script-pnfs_lspy)
 + [Interactive Job Running at BNL](#interactive-job-running-at-bnl)
 + [Condor Batch Job Running at BNL](#condor-batch-job-running-at-bnl)
 + [Using Xcache at BNL](#using-xcache-at-bnl)
@@ -16,7 +16,7 @@
 
 
 ***
-### Login to BNL machines
+## Login to BNL machines
 First you need ssh to spar machines at BNL:
 ```shell
 $ ssh -Y atlasgw
@@ -24,8 +24,9 @@ $ rterm -i
 ```
 
 ***
-### Location of this analysis example package at BNL
-You can pull the analysis package under the same github repo directory or copy from the directory at BNL:
+## Location of this analysis example package at BNL
+You can pull the analysis package under the same github repo 
+directory or copy from the directory at BNL:
 
 ```
 /atlasgpfs01/usatlas/data/yesw2000/T3-Example-BNL/
@@ -43,6 +44,8 @@ where you can find:
 - And the source code of this analysis pacakge under subdir **src/**
 
 ***
+## Env Setup and Package Building
+
 ### Setup of the Release Env
 First set up the release env by:
 ```
@@ -52,7 +55,6 @@ asetup AnalysisBase,21.2.81
 Next time you log in, you can simply run **asetup** under the same dir.
 
 
-***
 ### Package Building
 To build the single package, just run under that dir:
 ```shell
@@ -87,7 +89,7 @@ Options:
 
 
 ***
-### Dataset Preparation
+## Dataset Preparation
 
 To run the analysis, we need an input dataset.
 ```
@@ -101,20 +103,6 @@ voms-proxy-init -voms atlas
 pnfs_ls.py $dset -o dset-inside.clist                       # pls run "pns_ls.py -h" for usage (next section)
 pnfs_ls.py $dset --useXRootdOutside -o dset-outside.clist   # for outside access
 ```
-
-Let us look into the generated file dset-inside.clist
-`$ head -5 dset-inside.clist`
-<blockquote><pre>
-# clist file for access within BNL
-#site= BNL-OSG2_LOCALGROUPDISK ; dset= data18_13TeV.00348885.physics_Main.deriv.DAOD_EXOT12.f937_m1972_p3553_tid14278917_00
-root://dcgftp.usatlas.bnl.gov:1096//pnfs/usatlas.bnl.gov/LOCALGROUPDISK/rucio/data18_13TeV/da/ea/DAOD_EXOT12.14278917._000001.pool.root.1
-root://dcgftp.usatlas.bnl.gov:1096//pnfs/usatlas.bnl.gov/LOCALGROUPDISK/rucio/data18_13TeV/32/82/DAOD_EXOT12.14278917._000002.pool.root.1
-root://dcgftp.usatlas.bnl.gov:1096//pnfs/usatlas.bnl.gov/LOCALGROUPDISK/rucio/data18_13TeV/86/76/DAOD_EXOT12.14278917._000003.pool.root.1
-</pre></blockquote>
-
-
-***
-### Usage of script pnfs_ls.py
 
 To get the script pnfs_ls.py usage, just run **pnfs_ls.py -h**. 
 
@@ -156,8 +144,19 @@ Options:
 </pre></blockquote>
 </details>
 
+Let us look into the generated file dset-inside.clist
+`$ head -5 dset-inside.clist`
+<blockquote><pre>
+# clist file for access within BNL
+#site= BNL-OSG2_LOCALGROUPDISK ; dset= data18_13TeV.00348885.physics_Main.deriv.DAOD_EXOT12.f937_m1972_p3553_tid14278917_00
+root://dcgftp.usatlas.bnl.gov:1096//pnfs/usatlas.bnl.gov/LOCALGROUPDISK/rucio/data18_13TeV/da/ea/DAOD_EXOT12.14278917._000001.pool.root.1
+root://dcgftp.usatlas.bnl.gov:1096//pnfs/usatlas.bnl.gov/LOCALGROUPDISK/rucio/data18_13TeV/32/82/DAOD_EXOT12.14278917._000002.pool.root.1
+root://dcgftp.usatlas.bnl.gov:1096//pnfs/usatlas.bnl.gov/LOCALGROUPDISK/rucio/data18_13TeV/86/76/DAOD_EXOT12.14278917._000003.pool.root.1
+</pre></blockquote>
+
+
 ***
-### Interactive Job Running at BNL
+## Interactive Job Running at BNL
 
 Now we can run the job interactively
 ```shell
@@ -192,7 +191,7 @@ which will yield the plot
 
 
 ***
-### Condor Batch Job Running at BNL
+## Condor Batch Job Running at BNL
 
 At BNL, the batch queue uses condor system.
 The working directory of Condor batch jobs is different from current 
@@ -205,7 +204,7 @@ ls -l $X509_USER_PROXY    # under local disk /tmp/, we need copy/delegate it to 
 
 Let us take a look of job description file **test-condor.job**
 
-Please click the filename to see its content
+Please click the following filename to see its content
 <details>
 
 <summary>test-condor.job</summary>
@@ -274,7 +273,7 @@ file *myOutputFile.root* and make the plot.
 
 
 ***
-### Using Xcache at BNL
+## Using Xcache at BNL
 
 Xcache enables to access data remotely and also to cache them locally 
 for faster access in future.
@@ -296,7 +295,7 @@ cd T3-Example-BNL/Interactive-Job
 ../bin/Exam_JetsPlot $inputFile > myjob.log 2>&1
 ```
 
-#### Using Xcache (gLFN) at BNL
+### Using Xcache (gLFN) at BNL
 
 Xcache at BNL also supports gLFN (global Logical File Name) access, 
 without the need of knowing the exact path of a given filename.

@@ -1,0 +1,157 @@
+### SLAC-T3: Login & Setup
+
+ssh to centos7 machines at SLAC:
+ssh -Y centos7.slac.stanford.edu
+
+Location of the analysis package:
+/nfs/slac/g/atlas/u02/yesw/T3-Example-SLAC
+|-- 00-Readme.txt
+|-- LSF-Job
+|   `-- test-LSF.sh
+`-- src
+    |-- CMakeLists.txt
+    `-- Exam_JetsPlot.cxx
+Please copy (cp -R) the whole dir to your own dir, and read the file 00-Readme.txt
+First set up the env:
+export ATLAS_LOCAL_ROOT_BASE=/cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase
+source $ATLAS_LOCAL_ROOT_BASE/user/atlasLocalSetup.sh
+asetup AnalysisBase,21.2.81
+Then build the package
+cmake src  # generate Makefile
+make          # compile & create executable file
+
+
+
+### Dataset Preparation
+
+To run the analysis, we need the following local input dataset.
+dset=data16_13TeV.00311481.physics_Main.merge.DAOD_SUSY15.f758_m1616_r8669_p3185_tid11525262_00
+To list the files in the dataset, set up rucio env and VO-atlas proxy first, 
+     then run rucio to list files path.
+lsetup rucio
+voms-proxy-init -voms atlas
+rucio list-file-replicas --rse SLACXRD_LOCALGROUPDISK --protocols root $dset > dset-outside.txt 
+sed 's#griddev03.slac.stanford.edu:2094#atlrdr1#' dset-outside.txt > dset-inside.txt
+
+Let us look into the generated file dset-inside.txt
+% head -5 dset-inside.clist
++--------------+------------------------------------------+------------+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| SCOPE        | NAME                                     | FILESIZE   | ADLER32   | RSE: REPLICA                                                                                                                                                        |
+|--------------+------------------------------------------+------------+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| data16_13TeV | DAOD_SUSY15.11525262._000003.pool.root.1 | 72.272 MB  | 9e258b16  | SLACXRD_LOCALGROUPDISK: root://atlrdr1//xrootd/atlas/atlaslocalgroupdisk/rucio/data16_13TeV/f9/bd/DAOD_SUSY15.11525262._000003.pool.root.1 |
+| data16_13TeV | DAOD_SUSY15.11525262._000006.pool.root.1 | 70.782 MB  | a2844b00  | SLACXRD_LOCALGROUPDISK: root://atlrdr1//xrootd/atlas/atlaslocalgroupdisk/rucio/data16_13TeV/74/f9/DAOD_SUSY15.11525262._000006.pool.root.1 |
+
+
+
+### Interactive Job Running
+
+Now we can run the job interactively
+mkdir Interactive-Job
+cd Interactive-Job
+# take one input file in "dset-inside.txt"
+inputFile=root://atlrdr1//xrootd/atlas/atlaslocalgroupdisk/rucio/data16_13TeV/f9/bd/DAOD_SUSY15.11525262._000003.pool.root.1
+../bin/Exam_JetsPlot $inputFile > myjob.log 2>&1
+It will write out an output file myOutputFile.root
+
+Let us look into the output root file myOutputFile.root
+% root -l  myOutputFile.root
+root [1] .ls
+TFile**         myOutputFile.root
+ TFile*         myOutputFile.root
+  KEY: TH1D     h_njets_raw;1
+  KEY: TH1D     h_mjj_raw;1
+root [2] h_mjj_raw->Draw();
+
+
+### Job Running on LSF
+
+Then let try run the job on LSF batch system. As Wei already mentioned, LSF batch jobs inherit your current working environment (variables & working directory).
+cd LSF-Job
+cat test-LSF.sh
+
+Let us take a look of batch job script file test-LSF.sh
+% cat test-LSF.sh
+# write both stdout and stderr into one log file
+log=$PWD/myjob.log
+exec &>$log
+
+inputFile=root://atlrdr1//xrootd/atlas/atlaslocalgroupdisk/rucio/data16_13TeV/7f/94/DAOD_SUSY15.11525262._000021.pool.root.1
+
+../bin/Exam_JetsPlot $inputFile
+
+
+Run the following command to submit the condor job
+bsub -R 'centos7' -q atl-analq < test-LSF.sh
+Job <468325> is submitted to queue <atl-analq>.
+bjobs jobID    # check job status
+
+Output of bjobs  for running jobs
+% bjobs 468325
+JOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME
+468325  yesw    RUN   atl-analq  cent7d      kiso0030    *inputFile Aug  2 11:28
+
+Output of condor_q for complete jobs
+% bjobs 468325
+JOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME
+468325  yesw    DONE  atl-analq  cent7d      kiso0030    *inputFile Aug  2 11:28
+
+After the job is done, we will see
+% ls -l
+total 100
+-rw-r--r--. 1 yesw atlas  4468 Aug  2 11:28 myOutputFile.root
+-rw-r--r--. 1 yesw atlas 87557 Aug  2 11:28 myjob.log
+-rw-r--r--. 1 yesw atlas   239 Aug  2 11:22 test-LSF.sh
+There are 2 files created by the batch job: myjob.log and myOutputFile.root
+They are being updated continuously during the job running because
+the work directory of the batch job is same as the directory where the job is submitted.
+
+Similarly, you can also look into the output 
+file myOutputFile.root and make plot.
+
+
+
+
+### Using Xcache at SLAC
+
+Xcache enables to access data remotely and also to cache them locally for faster access in future.
+The Xcache server at SLAC is root://atlfax.slac.stanford.edu/, we will try to cache the files at BNL.
+Let us take the input file used in the BNL example. At BNL, the inputFile name is 
+inputFile=root://dcgftp.usatlas.bnl.gov:1096/pnfs/usatlas.bnl.gov/LOCALGROUPDISK/rucio/data18_13TeV/da/ea/DAOD_EXOT12.14278917._000001.pool.root.1
+
+The port 1096 is for inside access. For outside access, the port is 1094. So, the inputFile becomes
+inputFile=root://dcgftp.usatlas.bnl.gov:1094/pnfs/usatlas.bnl.gov/LOCALGROUPDISK/rucio/data18_13TeV/da/ea/DAOD_EXOT12.14278917._000001.pool.root.1
+
+For Xcache, we need add the Xcache server prefix with two slash characters, that is,
+inputFile=root://atlfax.slac.stanford.edu//root://dcgftp.usatlas.bnl.gov:1094/pnfs/usatlas.bnl.gov/LOCALGROUPDISK/rucio/data18_13TeV/da/ea/DAOD_EXOT12.14278917._000001.pool.root.1
+
+cd Interactive-Job
+../bin/Exam_JetsPlot $inputFile > myjob.log 2>&1
+
+
+
+#### Using Xcache (gLFN) at SLAC
+
+Xcache at SLAC also supports gLFN (global Logical File Name) access, without knowing the exact path of a given filename.
+Let us take the same dataset used in the BNL example.
+rucio list-dataset-replicas $dset
+DATASET: data18_13TeV:data18_13TeV.00348885.physics_Main.deriv.DAOD_EXOT12.f937_m1972_p3553_tid14278917_00
++-------------------------+---------+---------+
+| RSE                     |   FOUND |   TOTAL |
+|-------------------------+---------+---------|
+| CERN-PROD_DATADISK      |      83 |      83 |
+| GRIF-LPNHE_DATADISK     |      83 |      83 |
+| BNL-OSG2_LOCALGROUPDISK |      83 |      83 |
+| MAINZ_LOCALGROUPDISK    |      83 |      83 |
++-------------------------+---------+---------+
+
+List just the filenames in the dataset
+rucio list-content $dset
++-------------------------------------------------------+--------------+
+| SCOPE:NAME                                            | [DID TYPE]   |
+|-------------------------------------------------------+--------------|
+| data18_13TeV:DAOD_EXOT12.14278917._000001.pool.root.1 | FILE         |
+| data18_13TeV:DAOD_EXOT12.14278917._000002.pool.root.1 | FILE         |
+Let us take the second one file.
+inputFile=root://atlfax.slac.stanford.edu//atlas/rucio/data18_13TeV:DAOD_EXOT12.14278917._000002.pool.root.1
+../bin/Exam_JetsPlot $inputFile > myjob.log 2>&1
+
