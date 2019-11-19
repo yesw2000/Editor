@@ -3,11 +3,6 @@
 
 ## Table of Contents
 
-Table of Contents
-=================
-
-This is a shortcut to [Location of this analysis example package at BNL](#location-of-this-analysis-example-package-at-bnl)
-
 * [Login to BNL machines](#login-to-bnl-machines)
 * [Location of this analysis example package at BNL](#location-of-this-analysis-example-package-at-bnl)
 * [Setup of the Release Env](#setup-of-the-release-env)
@@ -27,7 +22,6 @@ $ rterm -i
 ```
 
 ***
-
 ### Location of this analysis example package at BNL
 You can pull the analysis package under the same github repo directory or copy from the directory at BNL:
 
@@ -46,7 +40,7 @@ where you can find:
 - The condor job description file **test-condor.job**
 - And the source code of this analysis pacakge under subdir **src/**
 
-
+***
 ### Setup of the Release Env
 First set up the release env by:
 ```
@@ -56,6 +50,7 @@ asetup AnalysisBase,21.2.81
 Next time you log in, you can simply run **asetup** under the same dir.
 
 
+***
 ### Package Building
 To build the single package, just run under that dir:
 ```shell
@@ -89,6 +84,7 @@ Options:
 </pre></blockquote>
 
 
+***
 ### Dataset Preparation
 
 To run the analysis, we need an input dataset.
@@ -113,6 +109,7 @@ root://dcgftp.usatlas.bnl.gov:1096//pnfs/usatlas.bnl.gov/LOCALGROUPDISK/rucio/da
 </pre></blockquote>
 
 
+***
 ### Usage of script pnfs_ls.py
 
 To get the script pnfs_ls.py usage, just run **pnfs_ls.py -h**:
@@ -149,7 +146,7 @@ Options:
                         specify a BNL site, overriding the one choosen by the script
 </pre></blockquote>
 
-
+***
 ### Interactive Job Running at BNL
 
 Now we can run the job interactively
@@ -171,7 +168,7 @@ input file and event processing progress.
 
 Let us look into the output root file **myOutputFile.root**
 <blockquote>
-% root -l  myOutputFile.root
+$ root -l  myOutputFile.root
 root [1] .ls
 TFile**         myOutputFile.root
  TFile*         myOutputFile.root
@@ -184,11 +181,12 @@ which will yield the plot
 ![](./plot-BNL-interactive.png)
 
 
+***
 ### Condor Batch Job Running at BNL
 
 At BNL, the batch queue uses condor system.
 The working directory of Condor batch jobs is different from current 
-working directory, and you need specify "GetEnv = True" to pass 
+working directory, and you need specify **"GetEnv = True"** to pass 
 the current env variables.
 ```shell
 cd Condor-Job
@@ -217,3 +215,121 @@ WhenToTransferOutput=on_exit
 
 queue
 ```
+
+Run the following command to submit the condor job
+```shell
+$ condor_submit  test-condor.job
+```
+
+Then you can run **condor_q** to check your job status.
+<blockquote>
+$ condor_q
+-- Schedd: spar0103.usatlas.bnl.gov : <130.199.48.19:9618?... @ 08/02/19 13:12:27
+ ID       OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD
+35106.0   yesw2000        8/2  13:12   0+00:00:00 I  0    0.3 Exam_JetsPlot
+
+Total for query: 1 jobs; 0 completed, 0 removed, 1 idle, 0 running, 0 held, 0 suspended 
+Total for yesw2000: 1 jobs; 0 completed, 0 removed, 1 idle, 0 running, 0 held, 0 suspended 
+Total for all users: 2 jobs; 0 completed, 0 removed, 1 idle, 1 running, 0 held, 0 suspended
+</blockquote>
+
+
+After the job is done, we will see
+<blockquote>
+$ ls -l
+total 44
+-rw-r--r-- 1 yesw2000 usatlas  4367 Aug  2 13:15 myOutputFile.root
+-rw-r--r-- 1 yesw2000 usatlas   967 Aug  2 13:15 myjob-running.log
+-rw-r--r-- 1 yesw2000 usatlas   335 Aug  2 13:15 myjob.err
+-rw-r--r-- 1 yesw2000 usatlas 20934 Aug  2 13:15 myjob.out
+-rw-r--r-- 1 yesw2000 usatlas   434 Aug  2 12:18 test-condor.job
+</blockquote>
+
+
+There are 4 files created by the batch job:
+- *myjob-running.log*, is the condor log file, created right 
+  at the job submission and being updated until the job completion.
+- Other 3 files, *myjob.out*, *myjob.err* and *myOutputFile.root*, 
+  created on the batch machine, transferred back after the job completion.
+
+Similarly, you can also look into the output 
+file *myOutputFile.root* and make the plot.
+
+
+***
+### Using Xcache at BNL
+
+Xcache enables to access data remotely and also to cache them locally 
+for faster access in future.
+
+The Xcache server at BNL is **root://xrootd03.usatlas.bnl.gov:1094/**.
+
+Let us take the input file used in the SLAC example. 
+At SLAC, the inputFile name for outside access (check the file 
+*dset-outside.txt* at SLAC) is
+```
+inputFile=root://griddev03.slac.stanford.edu:2094//xrootd/atlas/atlaslocalgroupdisk/rucio/data16_13TeV/f9/bd/DAOD_SUSY15.11525262._000003.pool.root.1
+```
+
+For Xcache, we need add the Xcache server prefix with two slash characters, 
+that is,
+```
+inputFile=root://xrootd03.usatlas.bnl.gov:1094//root://griddev03.slac.stanford.edu:2094//xrootd/atlas/atlaslocalgroupdisk/rucio/data16_13TeV/f9/bd/DAOD_SUSY15.11525262._000003.pool.root.1
+cd T3-Example-BNL/Interactive-Job
+../bin/Exam_JetsPlot $inputFile > myjob.log 2>&1
+```
+
+#### Using Xcache (gLFN) at BNL
+
+Xcache at BNL also supports gLFN (global Logical File Name) access, 
+without the need of knowing the exact path of a given filename.
+
+Let us take the same dataset used in the SLAC example.
+<blockquote>
+$ rucio list-dataset-replicas $dset
+DATASET: data16_13TeV:data16_13TeV.00311481.physics_Main.merge.DAOD_SUSY15.f758_m1616_r8669_p3185_tid11525262_00
++-------------------------------+---------+---------+
+| RSE                           |   FOUND |   TOTAL |
+|-------------------------------+---------+---------|
+| MWT2_UC_LOCALGROUPDISK        |      39 |      39 |
+| OU_OSCER_ATLAS_LOCALGROUPDISK |      39 |      39 |
+| AGLT2_LOCALGROUPDISK          |      39 |      39 |
+| NERSC_LOCALGROUPDISK          |      39 |      39 |
+| BNL-OSG2_LOCALGROUPDISK       |      39 |      39 |
+| CERN-PROD_DATADISK            |      39 |      39 |
+| NET2_LOCALGROUPDISK           |      39 |      39 |
+| SLACXRD_LOCALGROUPDISK        |      39 |      39 |
+| SWT2_CPB_LOCALGROUPDISK       |      39 |      39 |
+| NET2_DATADISK                 |      39 |      39 |
++-------------------------------+---------+---------+
+</blockquote>
+
+Let us to list the filenames in the dataset
+<blockquote>
+$ rucio list-content $dset
++-------------------------------------------------------+--------------+
+| SCOPE:NAME                                            | [DID TYPE]   |
+|-------------------------------------------------------+--------------|
+| data16_13TeV:DAOD_SUSY15.11525262._000003.pool.root.1 | FILE         |
+| data16_13TeV:DAOD_SUSY15.11525262._000006.pool.root.1 | FILE         |
+...
+</blockquote>
+
+Let us take the second one file.
+```
+inputFile=root://xrootd03.usatlas.bnl.gov:1094//atlas/rucio/data16_13TeV:DAOD_SUSY15.11525262._000003.pool.root.1
+../bin/Exam_JetsPlot $inputFile > myjob.log 2>&1
+```
+
+Enclosed is a screenshot of the condor running jobs.
+<blockquote>
+$ condor_q
+-- Schedd: spar0103.usatlas.bnl.gov : <130.199.48.19:9618?... @ 08/02/19 13:12:36
+ ID       OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD
+35106.0   yesw2000        8/2  13:12   0+00:00:01 R  0    0.3 Exam_JetsPlot
+
+Total for query: 1 jobs; 0 completed, 0 removed, 0 idle, 1 running, 0 held, 0 suspended 
+Total for yesw2000: 1 jobs; 0 completed, 0 removed, 0 idle, 1 running, 0 held, 0 suspended 
+Total for all users: 2 jobs; 0 completed, 0 removed, 0 idle, 2 running, 0 held, 0 suspended
+</blockquote>
+
