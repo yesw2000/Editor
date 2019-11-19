@@ -167,7 +167,7 @@ You can take a look of the log file myjob.log, containing info of
 input file and event processing progress.
 
 Let us look into the output root file **myOutputFile.root**
-<blockquote>
+<blockquote><pre>
 $ root -l  myOutputFile.root
 root [1] .ls
 TFile**         myOutputFile.root
@@ -175,7 +175,7 @@ TFile**         myOutputFile.root
   KEY: TH1D     h_njets_raw;1
   KEY: TH1D     h_mjj_raw;1
 root [2] h_mjj_raw->Draw();
-</blockquote>
+</pre></blockquote>
 which will yield the plot 
 
 ![](./plot-BNL-interactive.png)
@@ -222,7 +222,7 @@ $ condor_submit  test-condor.job
 ```
 
 Then you can run **condor_q** to check your job status.
-<blockquote>
+<blockquote><pre>
 $ condor_q
 -- Schedd: spar0103.usatlas.bnl.gov : <130.199.48.19:9618?... @ 08/02/19 13:12:27
  ID       OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD
@@ -231,11 +231,11 @@ $ condor_q
 Total for query: 1 jobs; 0 completed, 0 removed, 1 idle, 0 running, 0 held, 0 suspended 
 Total for yesw2000: 1 jobs; 0 completed, 0 removed, 1 idle, 0 running, 0 held, 0 suspended 
 Total for all users: 2 jobs; 0 completed, 0 removed, 1 idle, 1 running, 0 held, 0 suspended
-</blockquote>
+</pre></blockquote>
 
 
 After the job is done, we will see
-<blockquote>
+<blockquote><pre>
 $ ls -l
 total 44
 -rw-r--r-- 1 yesw2000 usatlas  4367 Aug  2 13:15 myOutputFile.root
@@ -243,7 +243,7 @@ total 44
 -rw-r--r-- 1 yesw2000 usatlas   335 Aug  2 13:15 myjob.err
 -rw-r--r-- 1 yesw2000 usatlas 20934 Aug  2 13:15 myjob.out
 -rw-r--r-- 1 yesw2000 usatlas   434 Aug  2 12:18 test-condor.job
-</blockquote>
+</pre></blockquote>
 
 
 There are 4 files created by the batch job:
@@ -254,6 +254,8 @@ There are 4 files created by the batch job:
 
 Similarly, you can also look into the output 
 file *myOutputFile.root* and make the plot.
+
+![](./plot-BNL-batch.png)
 
 
 ***
@@ -285,7 +287,7 @@ Xcache at BNL also supports gLFN (global Logical File Name) access,
 without the need of knowing the exact path of a given filename.
 
 Let us take the same dataset used in the SLAC example.
-<blockquote>
+<blockquote><pre>
 $ rucio list-dataset-replicas $dset
 DATASET: data16_13TeV:data16_13TeV.00311481.physics_Main.merge.DAOD_SUSY15.f758_m1616_r8669_p3185_tid11525262_00
 +-------------------------------+---------+---------+
@@ -302,10 +304,10 @@ DATASET: data16_13TeV:data16_13TeV.00311481.physics_Main.merge.DAOD_SUSY15.f758_
 | SWT2_CPB_LOCALGROUPDISK       |      39 |      39 |
 | NET2_DATADISK                 |      39 |      39 |
 +-------------------------------+---------+---------+
-</blockquote>
+</pre></blockquote>
 
 Let us to list the filenames in the dataset
-<blockquote>
+<blockquote><pre>
 $ rucio list-content $dset
 +-------------------------------------------------------+--------------+
 | SCOPE:NAME                                            | [DID TYPE]   |
@@ -313,7 +315,7 @@ $ rucio list-content $dset
 | data16_13TeV:DAOD_SUSY15.11525262._000003.pool.root.1 | FILE         |
 | data16_13TeV:DAOD_SUSY15.11525262._000006.pool.root.1 | FILE         |
 ...
-</blockquote>
+</pre></blockquote>
 
 Let us take the second one file.
 ```
@@ -322,7 +324,7 @@ inputFile=root://xrootd03.usatlas.bnl.gov:1094//atlas/rucio/data16_13TeV:DAOD_SU
 ```
 
 Enclosed is a screenshot of the condor running jobs.
-<blockquote>
+<blockquote><pre>
 $ condor_q
 -- Schedd: spar0103.usatlas.bnl.gov : <130.199.48.19:9618?... @ 08/02/19 13:12:36
  ID       OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD
@@ -331,5 +333,5 @@ $ condor_q
 Total for query: 1 jobs; 0 completed, 0 removed, 0 idle, 1 running, 0 held, 0 suspended 
 Total for yesw2000: 1 jobs; 0 completed, 0 removed, 0 idle, 1 running, 0 held, 0 suspended 
 Total for all users: 2 jobs; 0 completed, 0 removed, 0 idle, 2 running, 0 held, 0 suspended
-</blockquote>
+</pre></blockquote>
 
