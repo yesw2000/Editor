@@ -4,6 +4,7 @@
 ## Table of Contents
 This is a pulldown menu for the table of contents:
 <details>
+
 <summary>TOC</summary>
 * [Login to BNL machines](#login-to-bnl-machines)
 * [Location of this analysis example package at BNL](#location-of-this-analysis-example-package-at-bnl)
@@ -15,6 +16,7 @@ This is a pulldown menu for the table of contents:
 * [Condor Batch Job Running at BNL](#condor-batch-job-running-at-bnl)
 * [Using Xcache at BNL](#using-xcache-at-bnl)
     + [Using Xcache (gLFN) at BNL](#using-xcache-glfn-at-bnl)
+
 </details>
 
 ***
