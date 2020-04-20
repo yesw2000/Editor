@@ -727,7 +727,7 @@ For example, you can put a keyword "atlas/" under the search field as
 shown below:
 
   - A screenshot of searching for "Atlas/" on the Docker Hub:  
-    ![DockerHub-Atlas.jpg](/twiki/pub/AtlasComputing/SingularityInAtlas/DockerHub-Atlas.jpg)
+    ![](./DockerHub-Atlas.jpg)
 
 Click on the found container, it will provides the pull command
 instruction and sometimes also a brief description.
