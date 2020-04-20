@@ -1,0 +1,603 @@
+ <h1><a name="Using_Singularity"></a>  Using Singularity </h1>
+<p>
+</p><div class="twikiToc"> <ul>
+<li> <a href="#Introduction"> Introduction</a> <ul>
+<li> <a href="#What_are_Containers"> What are Containers?</a>
+</li> <li> <a href="#What_is_Singularity"> What is Singularity?</a>
+</li></ul> 
+</li> <li> <a href="#Installation_of_Singularity"> Installation of Singularity</a> <ul>
+<li> <a href="#Singularity_on_Linux_OS"> Singularity on Linux OS</a>
+</li> <li> <a href="#Singularity_on_Mac_OS"> Singularity on Mac OS</a>
+</li> <li> <a href="#Singularity_on_Windows_10"> Singularity on Windows 10</a> <ul>
+<li> <a href="#Installation_of_Windows_Subsyste"> Installation of Windows Subsystem for Linux (WSL)</a>
+</li> <li> <a href="#Running_Windows_10_build_18917_o"> Running Windows 10 build 18917 or higher</a>
+</li> <li> <a href="#Installation_of_WSL2"> Installation of WSL2</a>
+</li> <li> <a href="#Use_the_Installed_Linux_on_Windo"> Use the Installed Linux on Windows 10</a>
+</li> <li> <a href="#Singularity_Installation_on_WSL2"> Singularity Installation on WSL2</a>
+</li></ul> 
+</li></ul> 
+</li> <li> <a href="#Using_Singularity_AN1"> Using Singularity</a> <ul>
+<li> <a href="#Singularity_Usage_Help"> Singularity Usage Help</a>
+</li> <li> <a href="#Cache_Folders"> Cache Folders</a>
+</li> <li> <a href="#Binding_Paths_and_Mounts"> Binding Paths and Mounts</a>
+</li> <li> <a href="#Examples"> Examples</a> <ul>
+<li> <a href="#Some_Fun_Exercise_Examples"> Some Fun Exercise Examples</a>
+</li> <li> <a href="#Using_Containers_for_LaTeX"> Using Containers for LaTeX</a>
+</li> <li> <a href="#Using_Containers_for_Machine_Lea"> Using Containers for Machine Learning</a>
+</li></ul> 
+</li> <li> <a href="#Using_Containers_through_ARLB"> Using Containers through ARLB</a>
+</li></ul> 
+</li> <li> <a href="#Explore_Container_Images"> Explore Container Images</a> <ul>
+<li> <a href="#Containers_on_CVMFS"> Containers on CVMFS</a>
+</li> <li> <a href="#Containers_on_Docker_Hub"> Containers on Docker Hub</a>
+</li> <li> <a href="#Containers_on_Singularity_Hub_an"> Containers on Singularity Hub and Library</a>
+</li></ul> 
+</li> <li> <a href="#Contained_based_Jobs_on_the_Grid"> Contained-based Jobs on the Grid</a>
+</li></ul> 
+</div>     <!-- this line is optional -->
+<p>
+</p><p>
+</p><h1><a name="Introduction"></a> Introduction </h1>
+<p>
+</p><h2><a name="What_are_Containers"></a> What are Containers? </h2>
+<p>
+<strong>Containers</strong> are an operating system virtualization technology used to package applications and their dependencies and run them in isolated environments. Unlike Virtual Machines, they share the host OS kernel, thus provide a <strong>lightweight</strong> method of packaging and deploying applications in a standardized way across many different types of infrastructure.
+</p><p>
+</p><h2><a name="What_is_Singularity"></a> What is Singularity? </h2>
+<p>
+* <a href="https://sylabs.io/" target="_blank">Singularity<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>* is a container platform. It allows you to create and run containers that package up pieces of software in a portable and reproducible way. In contrast to <a href="https://docs.docker.com/" target="_blank">Docker<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>, Singularity does not give superuser privileges. And it can access to the GPU on a host node in native speed.
+</p><p>
+You can build a container using Singularity on your laptop, and then run it on the grid. You can also make use of many already existing container images from different sources.
+</p><p>
+</p><h1><a name="Installation_of_Singularity"></a> Installation of Singularity </h1>
+<p>
+</p><h2><a name="Singularity_on_Linux_OS"></a> Singularity on Linux OS </h2>
+<p>
+    Most Linux Distros should come with the Singularity. For example, Singularity is already available on <strong>lxplus</strong> machines at CERN.
+</p><p>
+</p><pre>lxplus$ singularity --version
+singularity version 3.5.3-1.1.el7
+</pre>
+<p>
+    If it does not come with your Linux OS, you can find the installation instruction for the version of 3.5 (the latest one currently):
+</p><p>
+    <a href="https://sylabs.io/guides/3.5/admin-guide/installation.html" target="_blank">https://sylabs.io/guides/3.5/admin-guide/installation.html<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>
+</p><p>
+    The singularity maintained in Linux distribution repos (via apt or yum) tends to be older. If you like to install the latest version, you can visit <a href="https://github.com/sylabs/singularity/releases" target="_blank">the gitlab source site<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a> to install from the source.
+</p><p>
+</p><h2><a name="Singularity_on_Mac_OS"></a> Singularity on Mac OS </h2>
+<p>
+    Since Mac OS does not use Linux kernel, the Singularity for Linux does not work here. However, a new Singularity Desktop for Mac OS has been developed to take Linux-based containers. The installation instruction can be found <a href="https://sylabs.io/singularity-desktop-macos/" target="_blank">here<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>. It is still a beta release, and distributed as a DMG file (Mac OS disk image).
+The current beta release version is:
+</p><p>
+</p><pre>MacOS$ singularity --version
+singularity version 3.3.0-rc.1.658.g7427b73f1.dirty
+</pre>
+<p>
+    As stated on the page of <a href="https://sylabs.io/singularity-desktop-macos/" target="_blank">Singularity Desktop MacOS<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>, there are some limitations.
+</p><p>
+    Run <strong>singularity -h</strong> to  find the full available commands and options.  In comparison with the Singularity-3.5 on Linux, the Singularity on Mac OS misses many commands such as <strong>inspect</strong> and <strong>instance</strong>.
+</p><p>
+</p><p>
+</p><h2><a name="Singularity_on_Windows_10"></a> Singularity on Windows 10 </h2>
+<p>
+   In order to use Singularity on Windows, you need install a Linux distro first. It could be achieved through <a href="https://docs.microsoft.com/en-us/windows/wsl/faq" target="_blank">Windows Subsystem for Linux (WSL)<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a> without involving a Virtual Machine. <strong>WSL</strong> is a new Windows 10 feature that enables you to run native Linux command-line tools directly on Windows. So it is not available for other old Windows such as Windows 7.
+</p><p>
+</p><h3><a name="Installation_of_Windows_Subsyste"></a> Installation of Windows Subsystem for Linux (WSL) </h3>
+<p>
+   Please refer <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" target="_blank">the WSL installation guide for Windows 10<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>.
+</p><p>
+   First enable the option feature <strong>Microsoft-Windows-Subsystem-Linux</strong>. Open <strong>PowerShell as Administrator</strong> and run:
+</p><pre>Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+</pre> 
+   When prompted restart the computer.
+<p>
+   Then you can install your preferred Linux Distro, following <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" target="_blank">the link on the Microsoft store<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>, where there is no CentOS available. However, you can find the installation guide for CentOS at <a href="https://tipsmake.com/install-centos-on-windows-10-wsl" target="_blank">TipsMake.com<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>. Or download directly <a href="https://github.com/yuk7/CentWSL" target="_blank">the zip file at github<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a> and following the instruction to install it.
+</p><p>
+    Once your distro has been downloaded and installed, you will be prompted to <strong>create a new user account</strong> together with its password to <a href="https://docs.microsoft.com/en-us/windows/wsl/initialize-distro" target="_blank">initialize the new Linux distro<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>.
+</p><p>
+</p><h3><a name="Running_Windows_10_build_18917_o"></a> Running Windows 10 build 18917 or higher </h3>
+<p>
+   In order to install WSL2, ensure that you are running Windows 10 <strong>build 18917</strong> or higher. You can check your Windows version by opening <strong>Command Prompt</strong> and running the <strong>ver</strong> command.
+</p><blockquote> <pre>Microsoft Windows [Version 10.0.19587.1000]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Users\Shuwei&gt;ver
+
+Microsoft Windows [Version 10.0.19587.1000]
+</pre> </blockquote>
+<p>
+    Actually the Windows build information has already be displayed on the terminal top when the <strong>Command Prompt</strong> app is opened.
+</p><p>
+    You can also check the Windows build info in PowerShell with command <strong>systeminfo</strong>:
+</p><blockquote> <pre>PS C:\Users\Shuwei&gt; systeminfo | Select-String "^OS Name","^OS Version"
+
+OS Name:                   Microsoft Windows 10 Home Insider Preview
+OS Version:                10.0.19587 N/A Build 19587
+</pre> </blockquote>
+<p>
+    If your Windows build is lower than <strong>18917</strong>, you can update it by joining the Windows Insider Program and select the <strong>Fast ring</strong> or the <strong>Slow ring</strong>. Search for <code>"Windows Insider Program"</code> in the Windows start search box, and click the found <strong>Windows Insider Program settings</strong>. In the setting, pick your Insider settings to <strong>Fast</strong> or <strong>Slow</strong> ring. You can find more details at <a href="https://insider.windows.com/en-us/getting-started/#install" target="_blank">How to get started with Windows 10 Insider Preview builds<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>.
+</p><p>
+</p><h3><a name="Installation_of_WSL2"></a> Installation of WSL2 </h3>
+<p>
+   You can find <a href="https://docs.microsoft.com/en-us/windows/wsl/wsl2-install" target="_blank">the detailed instruction on installing WSL2 on Windows 10<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>. The first 2 requirements have already been discussed above. Next you need: </p><ul>
+<li> Enable the 'Virtual Machine Platform' optional component
+</li> <li> Set a distro to be backed by WSL2 using the command line
+</li> <li> Verify what versions of WSL your distros are using
+</li></ul> 
+<p>
+   To Enable the <strong>Virtual Machine Platform</strong>, run <strong>PowerShell as Adminstrator</strong> with:
+</p><pre>dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+</pre>
+    Then restart the computer.
+<p>
+    Next set the Linux dsitro to WSL2 by the following command under <strong>PowerShell</strong>:
+ </p><pre>wsl --set-default-version 2
+</pre>
+    which may take a while to apply.
+<p>
+    Now you can verify which WSL version used the Linux distro.
+</p><blockquote> <pre>PS C:\Users\Shuwei&gt; wsl -l -v
+  NAME            STATE           VERSION
+* Ubuntu-18.04    Stopped         2
+</pre> </blockquote>
+<p>
+</p><h3><a name="Use_the_Installed_Linux_on_Windo"></a> Use the Installed Linux on Windows 10 </h3>
+<p>
+    Open <strong>PowerShell under a regular user</strong> and run <strong>wsl</strong>:
+</p><blockquote> <pre>PS C:\Users\Shuwei&gt; wsl
+yesw2000@Home-Dell660:/mnt/c/Users/Shuwei$ echo $0
+-bash
+yesw2000@Home-Dell660:/mnt/c/Users/Shuwei$
+</pre> </blockquote>
+which starts the Linux and enter <strong>bash</strong>.
+<p>
+    You can also start the Linux by searching <strong>wsl</strong> or <strong>bash</strong> on the Windows Start Search Box and click on <strong>wsl Run command</strong> or <strong>bash Run command</strong>.
+</p><p>
+    If the Linux is already running, you can run "bash" to enter the Linux:
+</p><blockquote> <pre>PS C:\Users\Shuwei&gt; wsl -l -v
+  NAME            STATE           VERSION
+* Ubuntu-18.04    Running         2
+PS C:\Users\Shuwei&gt; bash
+yesw2000@Home-Dell660:/mnt/c/Users/Shuwei$
+</pre> </blockquote>
+<p>
+   After all terminals associated with the Linux have been closed, the running Linux will stop then.
+</p><p>
+</p><h3><a name="Singularity_Installation_on_WSL2"></a> Singularity Installation on WSL2 </h3>
+<p>
+   Start the Linux distro on Windows, then install Singularity as the same ways as on the Linux OS.
+</p><p>
+</p><h1><a name="Using_Singularity_AN1"></a> Using Singularity </h1>
+<p>
+</p><h2><a name="Singularity_Usage_Help"></a> Singularity Usage Help </h2>
+<p>
+    You can find the Singularity usage by running <strong>singularity -h</strong>
+</p><p>
+</p><blockquote> <pre>lxplus$ singularity -h       
+
+Linux container platform optimized for High Performance Computing (HPC) and
+Enterprise Performance Computing (EPC)
+
+Usage:
+  singularity [global options...]
+
+Description:
+  Singularity containers provide an application virtualization layer enabling
+  mobility of compute via both application and environment portability. With
+  Singularity one is capable of building a root file system that runs on any 
+  other Linux system where Singularity is installed.
+
+Options:
+  -d, --debug     print debugging information (highest verbosity)
+  -h, --help      help for singularity
+      --nocolor   print without color output (default False)
+  -q, --quiet     suppress normal output
+  -s, --silent    only print errors
+  -v, --verbose   print additional information
+      --version   version for singularity
+
+Available Commands:
+  build       Build a Singularity image
+  cache       Manage the local cache
+  capability  Manage Linux capabilities for users and groups
+  config      Manage various singularity configuration (root user only)
+  delete      Deletes requested image from the library
+  exec        Run a command within a container
+  help        Help about any command
+  inspect     Show metadata for an image
+  instance    Manage containers running as services
+  key         Manage OpenPGP keys
+  oci         Manage OCI containers
+  plugin      Manage Singularity plugins
+  pull        Pull an image from a URI
+  push        Upload image to the provided URI
+  remote      Manage singularity remote endpoints
+  run         Run the user-defined default command within a container
+  run-help    Show the user-defined help for an image
+  search      Search a Container Library for images
+  shell       Run a shell within a container
+  sif         siftool is a program for Singularity Image Format (SIF) file manipulation
+  sign        Attach a cryptographic signature to an image
+  test        Run the user-defined tests within a container
+  verify      Verify cryptographic signatures attached to an image
+  version     Show the version for Singularity
+
+Examples:
+  $ singularity help &lt;command&gt; [&lt;subcommand&gt;]
+  $ singularity help build
+  $ singularity help instance start
+</pre> </blockquote>
+<p>
+The most frequently used commands are: <strong>run</strong>, <strong>exec</strong>, <strong>shell</strong> and <strong>pull</strong>.
+</p><p>
+For additional help or support, please visit <a href="https://www.sylabs.io/docs/" target="_blank">https://www.sylabs.io/docs/<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>.
+For quick start of version-3.5, you can refer to <a href="https://sylabs.io/guides/3.5/user-guide/quick_start.html#" target="_blank">the User Guide<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>.
+</p><p>
+</p><h2><a name="Cache_Folders"></a> Cache Folders </h2>
+<p>
+To make downloading images for build and pull faster and less redundant, Singularity uses a caching strategy. By default, Singularity will create a set of <strong>cache folders</strong> in your <strong>$HOME</strong> directory for docker layers, Cloud library images, and metadata, respectively:
+</p><p> </p><ul>
+<li> $HOME/.singularity/cache/library
+</li> <li> $HOME/.singularity/cache/oci
+</li> <li> $HOME/.singularity/cache/oci-tmp
+</li></ul> 
+<p>
+which could take quite much space, depending the image size.
+</p><p>
+You can set the envvar <strong>SINGULARITY_CACHEDIR</strong> to use other directory than the default cache directory <strong>$HOME/.singularity/cache</strong>.
+</p><p>
+</p><h2><a name="Binding_Paths_and_Mounts"></a> Binding Paths and Mounts </h2>
+<p>
+On default,  Singularity will map the following directories on your host system to directories within the container:
+</p><p> </p><ul>
+<li> $HOME
+</li> <li> $PWD
+</li> <li> /tmp
+</li> <li> /proc
+</li> <li> /sys
+</li> <li> /dev
+</li></ul> 
+<p>
+You can bind additional directories with option <strong>-B | --bind</strong>, such as: </p><ul>
+<li> <code>-B /data</code>: map /data on the host to /data on the container
+</li> <li> or <code>-B /usr/local/share:/share,/data</code> (please note the <strong>comma delimiter</strong>) : map /usr/local/share on the host to /share on the container, and map /data on the host to /data on the container.
+</li></ul> 
+<p>
+You can also defined envvar <strong>SINGULARITY_BINDPATH</strong> (such as <code>export SINGULARITY_BINDPATH="/data:/mnt"</code>) to bind paths.
+</p><p>
+</p><h2><a name="Examples"></a> Examples </h2>
+<p>
+You need define the envvar <strong>SINGULARITY_CACHEDIR</strong> to a directory to have enough space to accommodate the Singularity cache.
+</p><p>
+</p><h3><a name="Some_Fun_Exercise_Examples"></a> Some Fun Exercise Examples </h3>
+<p>
+There are some fun exercises to play with the singularity command.
+One simple example is "Hello World", which takes the container image from <a href="https://singularity-hub.org/" target="_blank">the Singularity container hub<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>.
+</p><p>
+</p><blockquote> <pre>lxplus$ singularity run shub://vsoch/hello-world
+INFO:    Downloading shub image
+ 59.75 MiB / 59.75 MiB [================================] 100.00% 35.87 MiB/s 1s
+INFO:    Convert SIF file to sandbox...
+RaawwWWWWWRRRR!! Avocado!
+INFO:    Cleaning up image...
+</pre> </blockquote>
+<p>
+Let us try another example of "cow say":
+</p><p>
+</p><blockquote> <pre>lxplus$ singularity run shub://GodloveD/lolcow
+INFO:    Downloading shub image
+ 87.57 MiB / 87.57 MiB [================================] 100.00% 49.57 MiB/s 1s
+INFO:    Convert SIF file to sandbox...
+ _______________________________
+&lt; Keep it short for pithy sake. &gt;
+ -------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+INFO:    Cleaning up image...
+</pre> </blockquote>
+<p>
+The similar container image is also available on <a href="https://hub.docker.com/" target="_blank">the Docker Image Hub<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>.
+</p><p>
+</p><blockquote> <pre>lxplus$ singularity run docker://godlovedc/lolcow
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+Getting image source signatures
+Copying blob 9fb6c798fa41 done
+Copying blob 3b61febd4aef done
+Copying blob 9d99b9777eb0 done
+Copying blob d010c8cf75d7 done
+Copying blob 7fac07fb303e done
+Copying blob 8e860504ff1e done
+Copying config 73d5b1025f done
+Writing manifest to image destination
+Storing signatures
+2020/03/30 16:30:38  info unpack layer: sha256:9fb6c798fa41e509b58bccc5c29654c3ff4648b608f5daa67c1aab6a7d02c118
+2020/03/30 16:30:41  info unpack layer: sha256:3b61febd4aefe982e0cb9c696d415137384d1a01052b50a85aae46439e15e49a
+2020/03/30 16:30:41  info unpack layer: sha256:9d99b9777eb02b8943c0e72d7a7baec5c782f8fd976825c9d3fb48b3101aacc2
+2020/03/30 16:30:41  info unpack layer: sha256:d010c8cf75d7eb5d2504d5ffa0d19696e8d745a457dd8d28ec6dd41d3763617e
+2020/03/30 16:30:41  info unpack layer: sha256:7fac07fb303e0589b9c23e6f49d5dc1ff9d6f3c8c88cabe768b430bdb47f03a9
+2020/03/30 16:30:41  info unpack layer: sha256:8e860504ff1ee5dc7953672d128ce1e4aa4d8e3716eb39fe710b849c64b20945
+INFO:    Creating SIF file...
+INFO:    Convert SIF file to sandbox...
+ ________________________________________
+/ Q: What do you call the scratches that \
+| you get when a female                  |
+|                                        |
+\ sheep bites you? A: Ewe nicks.         /
+ ----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+INFO:    Cleaning up image...
+</pre> </blockquote>
+<p>
+As you see, singularity need download and convert the docker image into a singularity image file (sif) first.
+</p><p>
+Singularity version 3 also supports container images on <a href="https://cloud.sylabs.io/library" target="_blank">the Singularity container library<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>, which is not supported in Singularity version 2.
+Let us check what is the latest in the Ubuntu container on the library:
+</p><p>
+</p><blockquote> <pre>lxplus$ singularity -q exec library://ubuntu cat /etc/os-release
+NAME="Ubuntu"
+VERSION="18.10 (Cosmic Cuttlefish)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu Cosmic Cuttlefish (development branch)"
+VERSION_ID="18.10"
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+VERSION_CODENAME=cosmic
+UBUNTU_CODENAME=cosmic
+</pre> </blockquote>
+<p>
+</p><h3><a name="Using_Containers_for_LaTeX"></a> Using Containers for LaTeX </h3>
+<p>
+If you need LaTeX and do not have LaTeX installed locally, you can use LaTeX container images.
+</p><p>
+Let us pull the image and convert into sif first, and use the converted image locally:
+</p><p>
+</p><blockquote> <pre>lxplus$ singularity pull latex.sif docker://dockershelf/latex
+lxplus$ singularity shell latex.sif
+INFO:    Convert SIF file to sandbox...
+Singularity&gt; pdflatex --version
+pdfTeX 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian)
+kpathsea version 6.3.1
+Copyright 2019 Han The Thanh (pdfTeX) et al.
+There is NO warranty.  Redistribution of this software is
+covered by the terms of both the pdfTeX copyright and
+the Lesser GNU General Public License.
+For more information about these matters, see the file
+named COPYING and the pdfTeX source.
+Primary author of pdfTeX: Han The Thanh (pdfTeX) et al.
+Compiled with libpng 1.6.37; using libpng 1.6.37
+Compiled with zlib 1.2.11; using zlib 1.2.11
+Compiled with xpdf version 4.01
+.</pre> </blockquote>
+<p>
+There is another older PDFLaTex on the docker image hub, but with much more packages installed.
+</p><blockquote> <pre>lxplus$ singularity pull pdflatex.sif docker://astrotrop/pdflatex
+lxplus$ singularity shell pdflatex.sif
+INFO:    Convert SIF file to sandbox...
+Singularity&gt; pdflatex --version
+pdfTeX 3.14159265-2.6-1.40.15 (TeX Live 2014)
+kpathsea version 6.2.0
+Copyright 2014 Peter Breitenlohner (eTeX)/Han The Thanh (pdfTeX).
+There is NO warranty.  Redistribution of this software is
+covered by the terms of both the pdfTeX copyright and
+the Lesser GNU General Public License.
+For more information about these matters, see the file
+named COPYING and the pdfTeX source.
+Primary author of pdfTeX: Peter Breitenlohner (eTeX)/Han The Thanh (pdfTeX).
+Compiled with libpng 1.6.10; using libpng 1.6.10
+Compiled with zlib 1.2.8; using zlib 1.2.8
+Compiled with poppler version 0.26.2
+</pre> </blockquote>
+<p>
+Then you can process your tex file inside the container.
+</p><p>
+</p><h3><a name="Using_Containers_for_Machine_Lea"></a> Using Containers for Machine Learning </h3>
+<p>
+There are many containers available for machine learning.
+</p><p>
+For example, you can use sklearn containers.
+</p><blockquote> <pre>lxplus$  singularity pull sklearn.sif docker://fastgenomics/sklearn:0.19.1-p36-v5
+lxplus$  singularity shell sklearn.sif
+Singularity&gt; python3
+&gt;&gt;&gt; import sklearn  
+&gt;&gt;&gt; import pandas   
+&gt;&gt;&gt; import numpy    
+&gt;&gt;&gt; import scipy    
+</pre> </blockquote>
+<p>
+Atlas also provides machine learning containers on CVMFS:
+</p><blockquote> <pre>lxplus$ ls /cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlasml
+
+atlasml-base:latest    ml-base:centos           ml-base:py-3.6.8
+atlasml-base:py-3.6.8  ml-base:centos-py-3.6.8  ml-base:py-3.7.2
+atlasml-base:py-3.7.2  ml-base:centos-py-3.7.2
+ml-base:bionic         ml-base:latest
+singularity shell /cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlasml/atlasml-base:py-3.7.2
+Singularity&gt; python3
+&gt;&gt;&gt; import sklearn
+&gt;&gt;&gt; import torch
+</pre> </blockquote>
+<p>
+As the container path <code>/cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlasml/</code> indicates, the above container is also available on the docker hub via <strong>docker://</strong>. But it would take quite a while (about an hour) to pull the container from the docker hub and convert into a singularity image file (sif).
+</p><p>
+</p><p>
+</p><h2><a name="Using_Containers_through_ARLB"></a> Using Containers through ARLB </h2>
+<p>
+Prior to use ATLAS_LOCAL_ROOT_BASE (ALRB), you need install CVMFS first. Please refer to <a href="https://cernvm.cern.ch/portal/filesystem/quickstart" target="_blank">the CernVM-FS Client Quick Start<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a> at CERN for CVMFS installation guide.
+</p><p>
+Then define the command <strong>setupATLAS</strong> as follows:
+</p><pre>export ATLAS_LOCAL_ROOT_BASE=/cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase
+alias setupATLAS='source ${ATLAS_LOCAL_ROOT_BASE}/user/atlasLocalSetup.sh'
+</pre>
+<p>
+The option <strong>-c</strong> in the command <strong>setupATLAS</strong> takes container location or container keyword such as <strong>slc5</strong>, <strong>slc6</strong>, <strong>centos6</strong>, or <strong>centos7</strong>. Please check <a href="https://twiki.atlas-canada.ca/bin/view/AtlasCanada/Containers" target="_blank">ALRB Containers<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a> for more details.
+</p><p>
+For example, start a centos7 container with ALRB setup:
+</p><blockquote> <pre>lxplus$ setupATLAS  -c centos7
+------------------------------------------------------------------------------
+Singularity: 3.5.3
+From: /usr/bin/singularity
+ContainerType: atlas-default
+singularity  exec  -e  -H /afs/cern.ch/user/y/yesw/.alrb/container/singularity/home.snlmtE:/alrb -B /cvmfs:/cvmfs -B /afs/cern.ch/user/y:/home -B /tmp/yesw:/srv /cvmfs/atlas.cern.ch/repo/containers/fs/singularity/x86_64-centos7 /bin/bash
+------------------------------------------------------------------------------
+lsetup               lsetup &lt;tool1&gt; [ &lt;tool2&gt; ...] (see lsetup -h):
+ lsetup agis          ATLAS Grid Information System
+ lsetup asetup        (or asetup) to setup an Athena release
+ lsetup atlantis      Atlantis: event display
+ lsetup eiclient      Event Index 
+ lsetup emi           EMI: grid middleware user interface 
+ lsetup ganga         Ganga: job definition and management client
+ lsetup lcgenv        lcgenv: setup tools from cvmfs SFT repository
+ lsetup panda         Panda: Production ANd Distributed Analysis
+ lsetup pod           Proof-on-Demand (obsolete)
+ lsetup pyami         pyAMI: ATLAS Metadata Interface python client
+ lsetup root          ROOT data processing framework
+ lsetup rucio         distributed data management system client
+ lsetup views         Set up a full LCG release
+ lsetup xcache        XRootD local proxy cache
+ lsetup xrootd        XRootD data access
+advancedTools        advanced tools menu
+diagnostics          diagnostic tools menu
+helpMe               more help
+printMenu            show this menu
+showVersions         show versions of installed software
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+You are running on a RHEL7 compatible OS.
+Please refer to these pages for the status and open issues:
+ For releases:
+  https://twiki.cern.ch/twiki/bin/view/AtlasComputing/CentOS7Readiness#ATLAS_software_status
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+Singularity&gt; 
+</pre> </blockquote>
+<p>
+If you do not need either ALRB or CVMFS, then run with tag <strong>+noalrb</strong> and <strong>+nocvmfs</strong> after the image location/keyword:
+</p><blockquote> <pre>lxplus$ setupATLAS  -c centos7+noalrb+nocvmfs
+------------------------------------------------------------------------------
+Singularity: 3.5.3
+From: /usr/bin/singularity
+ContainerType: atlas-default
+singularity  exec  -e  -H /afs/cern.ch/user/y/yesw/.alrb/container/singularity/home.tbnhXz:/alrb -B /afs/cern.ch/user/y:/home -B /tmp/yesw:/srv /cvmfs/atlas.cern.ch/repo/containers/fs/singularity/x86_64-centos7 /bin/bash
+------------------------------------------------------------------------------
+Singularity&gt; 
+</pre> </blockquote>
+<p>
+If you like to start a Ubuntu OS without ALRB but with CVMFS, then run with tag <strong>+noalrb</strong> after the mage location/keyword:
+</p><blockquote> <pre>lxplus$ setupATLAS -c library://ubuntu+noalrb
+INFO:    Convert SIF file to sandbox...
+INFO:    Cleaning up image...
+------------------------------------------------------------------------------
+Singularity: 3.5.3
+From: /usr/bin/singularity
+ContainerType: non-atlas
+singularity  exec  -e  -H /afs/cern.ch/user/y/yesw/.alrb/container/singularity/home.Ion4ZS:/alrb -B /cvmfs:/cvmfs -B /afs/cern.ch/user/y:/home -B /tmp/yesw:/srv library://ubuntu /bin/bash
+------------------------------------------------------------------------------
+INFO:    Convert SIF file to sandbox...
+ setupATLAS is available.
+          
+Singularity&gt;
+</pre> </blockquote>
+<p>
+</p><h1><a name="Explore_Container_Images"></a> Explore Container Images </h1>
+<p>
+</p><h2><a name="Containers_on_CVMFS"></a> Containers on CVMFS </h2>
+<p>
+There are a few singularity containers accessible by keyword <strong>slc5</strong>, <strong>slc6</strong>, <strong>centos6</strong> and <strong>centos7</strong> through command <code>setupATLAS -c</code>. There are many other images available 
+under <strong>/cvmfs/unpacked.cern.ch/</strong>. If this CVMFS path is not visible, please add this mount point to the CVMFS client on your computer.
+</p><p>
+</p><blockquote> <pre>lxplus$ ls /cvmfs/unpacked.cern.ch/
+gitlab-registry.cern.ch  logDir  registry.hub.docker.com
+
+lxplus$ ls /cvmfs/unpacked.cern.ch/registry.hub.docker.com/
+atlas        atlasml   cmssw      jodafons  lofaruser      siscia
+atlasadc     atlrpv1l  danikam    kratsg    lukasheinrich  stfc
+atlasamglab  clelange  engineren  library   pyhf           sweber613
+
+lxplus$ ls /cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlasml
+atlasml-base:latest    ml-base:centos           ml-base:py-3.6.8
+atlasml-base:py-3.6.8  ml-base:centos-py-3.6.8  ml-base:py-3.7.2
+atlasml-base:py-3.7.2  ml-base:centos-py-3.7.2
+</pre> </blockquote>
+<p>
+The containers under <code>/cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlasml/</code> are for machine learning. For Atlas release containers, they 
+are under <code>/cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlas/</code>
+</p><blockquote> <pre>lxplus$ ls /cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlas
+analysisbase:21.2.10            athanalysis:21.2.102
+analysisbase:21.2.100           athanalysis:21.2.10-20171115
+[...]
+analysisbase:21.2.16            athanalysis:21.2.19
+analysisbase:21.2.16-20180129   athanalysis:21.2.19-20180221
+analysisbase:21.2.17            athena:21.0.15
+analysisbase:21.2.17-20180206   athena:21.0.15_100.0.2
+analysisbase:21.2.18            athena:21.0.15_31.8.1
+analysisbase:21.2.18-20180213   athena:21.0.15_DBRelease-100.0.2_Patched
+analysisbase:21.2.19            athena:21.0.23
+analysisbase:21.2.19-20180221   athena:21.0.23_DBRelease-200.0.1
+analysisbase:21.2.60            athena:21.0.31
+analysisbase:21.2.88            athena:21.0.31_100.0.2
+athanalysis:21.2.10             athena:21.0.31_31.8.1
+athanalysis:21.2.100            athena:22.0.5_2019-09-24T2128_100.0.2
+athanalysis:21.2.100-20191127   athena:22.0.6_2019-10-04T2129
+athanalysis:21.2.101            athena:22.0.9
+athanalysis:21.2.101-20191208
+</pre> </blockquote>
+<p>
+Let us take an example of release <a class="twikiLink" href="/twiki/bin/view/AtlasComputing/AthAnalysis">AthAnalysis</a>,2.2.115 under <code>/cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlas/</code>
+</p><blockquote> <pre>lxplus$ singularity exec -c /cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlas/athanalysis:21.2.115/release_setup.sh bash
+singularity exec -c /cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlas/athanalysis:21.2.115 bash
+Singularity&gt; ls /home/atlas
+release_setup.sh
+Singularity&gt; source /home/atlas/release_setup.sh
+Configured GCC from: /opt/lcg/gcc/8.3.0-cebb0/x86_64-centos7/bin/gcc
+Taking LCG releases from: /opt/lcg
+Taking Gaudi from: /usr/GAUDI/21.2.115/InstallArea/x86_64-centos7-gcc8-opt
+Configured AthAnalysis from: /usr/AthAnalysis/21.2.115/InstallArea/x86_64-centos7-gcc8-opt
+[bash][yesw AthAnalysis-21.2.115]:~ &gt;
+</pre> </blockquote>
+<p>
+That is, start the wanted container, then source /home/atlas/release_setup.sh.
+</p><p>
+</p><h2><a name="Containers_on_Docker_Hub"></a> Containers on Docker Hub </h2>
+<p>
+The Docker hub hosts the largest container images. You can input keyword to <a href="https://hub.docker.com/search/?q=rust&amp;type=image" target="_blank">search on the hub<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>.
+For example, you can put a keyword "atlas/" under the search field as shown below:
+</p><p> </p><ul>
+<li> A screenshot of searching for "Atlas/" on the Docker Hub: <br>     <img src="/twiki/pub/AtlasComputing/SingularityInAtlas/DockerHub-Atlas.jpg" alt="DockerHub-Atlas.jpg" width="1074" height="798">
+</li></ul> 
+<p>
+Click on the found container, it will provides the pull command instruction and sometimes also a brief description.
+</p><p>
+</p><h2><a name="Containers_on_Singularity_Hub_an"></a> Containers on Singularity Hub and Library </h2>
+<p>
+There are many container images on the Singularity Hub and Library. </p><ul>
+<li> Singularity Hub: <a href="https://singularity-hub.org/" target="_blank">https://singularity-hub.org/<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>. Click "Collections" on the top menu to search by <strong>Label</strong>, <strong>Tag</strong> or <strong>App</strong> name.
+</li> <li> Singularity Library: <a href="https://cloud.sylabs.io/library" target="_blank">https://cloud.sylabs.io/library<img alt="" src="/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif" width="13" height="12" border="0"></a>. It is not supported in Singularity version 2. Put keyword in the search field on the very top to search for your wanted container.
+</li></ul> 
+<p>
+</p><p>
+</p><h1><a name="Contained_based_Jobs_on_the_Grid"></a> Contained-based Jobs on the Grid </h1>
+<p>
+There are more resources available on the grid, you can run container-based jobs on the grid.
+Both prun and pathena provide an option <strong>--containerImage</strong> to allow jobs to run inside a specified container on the grid.
+Check the following page for more details:
+</p><p>
+<a href="https://twiki.cern.ch/twiki/bin/view/PanDA/PandaRun#Run_user_containers_jobs" target="_top">https://twiki.cern.ch/twiki/bin/view/PanDA/PandaRun#Run_user_containers_jobs</a>
+</p><p>
+You can also run <strong>prun --helpGroup=containerJob</strong> for more container-related options.
+</p><p>
+Please note that you should test your job interactively first as documented above, prior to submitting them to the grid.
+</p>
