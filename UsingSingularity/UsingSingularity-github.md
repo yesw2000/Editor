@@ -1,6 +1,4 @@
-# <span id="Using_Singularity"></span> Using Singularity
-
-<div class="twikiToc">
+# Using Singularity
 
   - [Introduction](#Introduction)
       - [What are Containers?](#What_are_Containers)
@@ -51,12 +49,11 @@ infrastructure.
 
 ## <span id="What_is_Singularity"></span> What is Singularity?
 
-\*
-[Singularity![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://sylabs.io/)\*
+**[Singularity](https://sylabs.io/)**
 is a container platform. It allows you to create and run containers that
 package up pieces of software in a portable and reproducible way. In
 contrast to
-[Docker![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://docs.docker.com/),
+**[Docker](https://docs.docker.com/)**,
 Singularity does not give superuser privileges. And it can access to the
 GPU on a host node in native speed.
 
@@ -82,7 +79,7 @@ instruction for the version of 3.5 (the latest one currently):
 The singularity maintained in Linux distribution repos (via apt or yum)
 tends to be older. If you like to install the latest version, you can
 visit [the gitlab source
-site![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://github.com/sylabs/singularity/releases)
+site](https://github.com/sylabs/singularity/releases)
 to install from the source.
 
 ## <span id="Singularity_on_Mac_OS"></span> Singularity on Mac OS
@@ -91,7 +88,7 @@ Since Mac OS does not use Linux kernel, the Singularity for Linux does
 not work here. However, a new Singularity Desktop for Mac OS has been
 developed to take Linux-based containers. The installation instruction
 can be found
-[here![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://sylabs.io/singularity-desktop-macos/).
+[here](https://sylabs.io/singularity-desktop-macos/).
 It is still a beta release, and distributed as a DMG file (Mac OS disk
 image). The current beta release version is:
 
@@ -99,7 +96,7 @@ image). The current beta release version is:
     singularity version 3.3.0-rc.1.658.g7427b73f1.dirty
 
 As stated on the page of [Singularity Desktop
-MacOS![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://sylabs.io/singularity-desktop-macos/),
+MacOS](https://sylabs.io/singularity-desktop-macos/),
 there are some limitations.
 
 Run **singularity -h** to find the full available commands and options.
@@ -110,7 +107,7 @@ OS misses many commands such as **inspect** and **instance**.
 
 In order to use Singularity on Windows, you need install a Linux distro
 first. It could be achieved through [Windows Subsystem for Linux
-(WSL)![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://docs.microsoft.com/en-us/windows/wsl/faq)
+(WSL)](https://docs.microsoft.com/en-us/windows/wsl/faq)
 without involving a Virtual Machine. **WSL** is a new Windows 10 feature
 that enables you to run native Linux command-line tools directly on
 Windows. So it is not available for other old Windows such as Windows 7.
@@ -118,7 +115,7 @@ Windows. So it is not available for other old Windows such as Windows 7.
 ### <span id="Installation_of_Windows_Subsyste"></span> Installation of Windows Subsystem for Linux (WSL)
 
 Please refer [the WSL installation guide for
-Windows 10![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 
 First enable the option feature **Microsoft-Windows-Subsystem-Linux**.
 Open **PowerShell as Administrator** and run:
@@ -129,18 +126,18 @@ When prompted restart the computer.
 
 Then you can install your preferred Linux Distro, following [the link on
 the Microsoft
-store![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://docs.microsoft.com/en-us/windows/wsl/install-win10),
+store](https://docs.microsoft.com/en-us/windows/wsl/install-win10),
 where there is no CentOS available. However, you can find the
 installation guide for CentOS at
-[TipsMake.com![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://tipsmake.com/install-centos-on-windows-10-wsl).
+[TipsMake.com](https://tipsmake.com/install-centos-on-windows-10-wsl).
 Or download directly [the zip file at
-github![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://github.com/yuk7/CentWSL)
+github](https://github.com/yuk7/CentWSL)
 and following the instruction to install it.
 
 Once your distro has been downloaded and installed, you will be prompted
 to **create a new user account** together with its password to
 [initialize the new Linux
-distro![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://docs.microsoft.com/en-us/windows/wsl/initialize-distro).
+distro](https://docs.microsoft.com/en-us/windows/wsl/initialize-distro).
 
 ### <span id="Running_Windows_10_build_18917_o"></span> Running Windows 10 build 18917 or higher
 
@@ -177,12 +174,12 @@ start search box, and click the found **Windows Insider Program
 settings**. In the setting, pick your Insider settings to **Fast** or
 **Slow** ring. You can find more details at [How to get started with
 Windows 10 Insider Preview
-builds![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://insider.windows.com/en-us/getting-started/#install).
+builds](https://insider.windows.com/en-us/getting-started/#install).
 
 ### <span id="Installation_of_WSL2"></span> Installation of WSL2
 
 You can find [the detailed instruction on installing WSL2 on
-Windows 10![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install).
+Windows 10](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install).
 The first 2 requirements have already been discussed above. Next you
 need:
 
@@ -316,7 +313,7 @@ The most frequently used commands are: **run**, **exec**, **shell** and
 For additional help or support, please visit
 <https://www.sylabs.io/docs/>. For quick start of version-3.5, you can
 refer to [the User
-Guide![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://sylabs.io/guides/3.5/user-guide/quick_start.html#).
+Guide](https://sylabs.io/guides/3.5/user-guide/quick_start.html#).
 
 ## <span id="Cache_Folders"></span> Cache Folders
 
@@ -367,7 +364,7 @@ have enough space to accommodate the Singularity cache.
 There are some fun exercises to play with the singularity command. One
 simple example is "Hello World", which takes the container image from
 [the Singularity container
-hub![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://singularity-hub.org/).
+hub](https://singularity-hub.org/).
 
 > 
 > 
@@ -397,7 +394,7 @@ Let us try another example of "cow say":
 >     INFO:    Cleaning up image...
 
 The similar container image is also available on [the Docker Image
-Hub![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://hub.docker.com/).
+Hub](https://hub.docker.com/).
 
 > 
 > 
@@ -440,7 +437,7 @@ a singularity image file (sif) first.
 
 Singularity version 3 also supports container images on [the Singularity
 container
-library![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://cloud.sylabs.io/library),
+library](https://cloud.sylabs.io/library),
 which is not supported in Singularity version 2. Let us check what is
 the latest in the Ubuntu container on the library:
 
@@ -556,7 +553,7 @@ file (sif).
 
 Prior to use ATLAS\_LOCAL\_ROOT\_BASE (ALRB), you need install CVMFS
 first. Please refer to [the CernVM-FS Client Quick
-Start![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://cernvm.cern.ch/portal/filesystem/quickstart)
+Start](https://cernvm.cern.ch/portal/filesystem/quickstart)
 at CERN for CVMFS installation guide.
 
 Then define the command **setupATLAS** as follows:
@@ -567,7 +564,7 @@ Then define the command **setupATLAS** as follows:
 The option **-c** in the command **setupATLAS** takes container location
 or container keyword such as **slc5**, **slc6**, **centos6**, or
 **centos7**. Please check [ALRB
-Containers![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://twiki.atlas-canada.ca/bin/view/AtlasCanada/Containers)
+Containers](https://twiki.atlas-canada.ca/bin/view/AtlasCanada/Containers)
 for more details.
 
 For example, start a centos7 container with ALRB setup:
@@ -722,7 +719,7 @@ That is, start the wanted container, then source
 
 The Docker hub hosts the largest container images. You can input keyword
 to [search on the
-hub![](/twiki/pub/TWiki/TWikiDocGraphics/external-link.gif)](https://hub.docker.com/search/?q=rust&type=image).
+hub](https://hub.docker.com/search/?q=rust&type=image).
 For example, you can put a keyword "atlas/" under the search field as
 shown below:
 
