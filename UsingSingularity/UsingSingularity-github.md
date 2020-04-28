@@ -604,6 +604,7 @@ on running the pull command.
      INFO:    Creating SIF file...
      INFO:    Build complete: pdflatex.sif
 </blockquote>
+</details>
 
 >
 >     cent7a(SLAC)$ singularity shell pdflatex.sif
