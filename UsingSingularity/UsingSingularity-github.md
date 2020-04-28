@@ -320,6 +320,7 @@ For additional help or support, please visit https://www.sylabs.io/docs/
 
 <summary>spar0101(BNL)$ singularity -h</summary>
 <blockquote>
+
      USAGE: singularity [global options...] <command> [command options...] ...
 
      GLOBAL OPTIONS:
