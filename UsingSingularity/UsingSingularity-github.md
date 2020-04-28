@@ -258,6 +258,7 @@ You can find the Singularity usage by running **singularity -h**
 
 <summary>cent7a(SLAC)$ singularity -h</summary>
 <blockquote>
+
      Linux container platform optimized for High Performance Computing (HPC) and
      Enterprise Performance Computing (EPC)
 
