@@ -541,7 +541,7 @@ There is another older PDFLaTex on the docker image hub, but with much
 more packages installed.
 
 Please click on the following arrow to get the details 
-on running the pull command.
+on running the **pull** command.
 
 <details>
 
