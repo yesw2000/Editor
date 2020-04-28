@@ -545,7 +545,7 @@ on running the pull command.
 
 <details>
 
-<summary>cent7a(SLAC)$ singularity pull pdflatex.sif docker://astrotrop/pdflatex
+<summary>cent7a(SLAC)$ singularity **pull** pdflatex.sif docker://astrotrop/pdflatex
 </summary>
 <blockquote>
 
