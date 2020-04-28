@@ -319,7 +319,7 @@ For additional help or support, please visit https://www.sylabs.io/docs/
 <details>
 
 <summary>spar0101(BNL)$ singularity -h</summary>
-<blockquote><pre>
+<blockquote>
      USAGE: singularity [global options...] <command> [command options...] ...
 
      GLOBAL OPTIONS:
@@ -359,7 +359,7 @@ For additional help or support, please visit https://www.sylabs.io/docs/
 
      For any additional help or support visit the Singularity
      website: https://www.sylabs.io/
-</pre></blockquote>
+</blockquote>
 </details>
 
 The most frequently used commands are: **run**, **exec**, **shell** and
