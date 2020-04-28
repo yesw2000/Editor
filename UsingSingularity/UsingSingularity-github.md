@@ -175,8 +175,8 @@ joining the Windows Insider Program and select the **Fast ring** or the
 **Slow ring**. Search for `"Windows Insider Program"` in the Windows
 start search box, and click the found **Windows Insider Program
 settings**. In the setting, pick your Insider settings to **Fast** or
-**Slow** ring. You can find more details at [How to get started with
-Windows 10 Insider Preview
+**Slow** ring. You can find more details at 
+[How to get started with Windows 10 Insider Preview
 builds](https://insider.windows.com/en-us/getting-started/#install).
 
 ### <span id="Installation_of_WSL2"></span> Installation of WSL2
@@ -252,7 +252,10 @@ ways as on the Linux OS.
 
 ## <span id="Singularity_Usage_Help"></span> Singularity Usage Help
 
-You can find the Singularity usage by running **singularity -h**
+You can find the Singularity usage by running **singularity -h**.
+
+Please click the following arrows to see the full usage for 
+the Singularity at SLAC and BNL.
 
 <details>
 
@@ -420,42 +423,36 @@ have enough space to accommodate the Singularity cache.
 
 There are some fun exercises to play with the singularity command. One
 simple example is "Hello World", which takes the container image from
-[the Singularity container
-hub](https://singularity-hub.org/).
+[the Singularity container hub](https://singularity-hub.org/).
 
 > 
-> 
->     lxplus$ singularity run shub://vsoch/hello-world
->     INFO:    Downloading shub image
->      59.75 MiB / 59.75 MiB [================================] 100.00% 35.87 MiB/s 1s
->     INFO:    Convert SIF file to sandbox...
->     RaawwWWWWWRRRR!! Avocado!
->     INFO:    Cleaning up image...
+> cent7a(SLAC)$ singularity run shub://vsoch/hello-world
+> INFO:    Downloading shub image
+> 59.75 MiB / 59.75 MiB [================================] 100.00% 35.87 MiB/s 1s
+> INFO:    Convert SIF file to sandbox...
+> RaawwWWWWWRRRR!! Avocado!
+> INFO:    Cleaning up image...
 
 Let us try another example of "cow say":
 
 > 
-> 
->     lxplus$ singularity run shub://GodloveD/lolcow
->     INFO:    Downloading shub image
->      87.57 MiB / 87.57 MiB [================================] 100.00% 49.57 MiB/s 1s
->     INFO:    Convert SIF file to sandbox...
->      _______________________________
->     < Keep it short for pithy sake. >
->      -------------------------------
->             \   ^__^
->              \  (oo)\_______
->                 (__)\       )\/\
->                     ||----w |
->                     ||     ||
->     INFO:    Cleaning up image...
+> spar0101(BNL)$ singularity run shub://GodloveD/lolcow   
+> Progress |===================================| 100.0% 
+>  _________________________________________
+> / Q: What's yellow, and equivalent to the \
+> \ Axiom of Choice? A: Zorn's Lemon.       /
+>  -----------------------------------------
+>         \   ^__^
+>          \  (oo)\_______
+>             (__)\       )\/\
+>                 ||----w |
+>                 ||     ||
 
 The similar container image is also available on [the Docker Image
 Hub](https://hub.docker.com/).
 
 > 
-> 
->     lxplus$ singularity run docker://godlovedc/lolcow
+>     cent7a(SLAC)$ singularity run docker://godlovedc/lolcow
 >     INFO:    Converting OCI blobs to SIF format
 >     INFO:    Starting build...
 >     Getting image source signatures
@@ -492,15 +489,13 @@ Hub](https://hub.docker.com/).
 As you see, singularity need download and convert the docker image into
 a singularity image file (sif) first.
 
-Singularity version 3 also supports container images on [the Singularity
-container
-library](https://cloud.sylabs.io/library),
-which is not supported in Singularity version 2. Let us check what is
-the latest in the Ubuntu container on the library:
+Singularity version 3 also supports container images on 
+[the Singularity container library](https://cloud.sylabs.io/library),
+which is not supported in Singularity version 2 (at BNL). 
+Let us check what is the latest in the Ubuntu container on the library:
 
 > 
-> 
->     lxplus$ singularity -q exec library://ubuntu cat /etc/os-release
+>     cent7a(SLAC)$ singularity -q exec library://ubuntu cat /etc/os-release
 >     NAME="Ubuntu"
 >     VERSION="18.10 (Cosmic Cuttlefish)"
 >     ID=ubuntu
@@ -520,12 +515,12 @@ If you need LaTeX and do not have LaTeX installed locally, you can use
 LaTeX container images.
 
 Let us pull the image and convert into sif first, and use the converted
-image locally:
+image locally. Please be note that the pull command in Singularity version 2 
+only supports shub URIs.
 
 > 
-> 
->     lxplus$ singularity pull latex.sif docker://dockershelf/latex
->     lxplus$ singularity shell latex.sif
+>     cent7a(SLAC)$ singularity pull latex.sif docker://dockershelf/latex
+>     cent7a(SLAC)$ singularity shell latex.sif
 >     INFO:    Convert SIF file to sandbox...
 >     Singularity> pdflatex --version
 >     pdfTeX 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian)
@@ -545,10 +540,73 @@ image locally:
 There is another older PDFLaTex on the docker image hub, but with much
 more packages installed.
 
-> 
-> 
->     lxplus$ singularity pull pdflatex.sif docker://astrotrop/pdflatex
->     lxplus$ singularity shell pdflatex.sif
+Please click on the following arrow to get the details 
+on running the pull command.
+
+<details>
+
+<summary>cent7a(SLAC)$ singularity pull pdflatex.sif docker://astrotrop/pdflatex
+</summary>
+<blockquote>
+
+     INFO:    Converting OCI blobs to SIF format
+     INFO:    Starting build...
+     Getting image source signatures
+     Copying blob a3ed95caeb02 done
+     Copying blob a3ed95caeb02 skipped: already exists
+     Copying blob 44a921a97b90 done
+     Copying blob a3ed95caeb02 skipped: already exists
+     Copying blob 41a3cfb403b3 done
+     Copying blob cbb895a342ea done
+     Copying blob e0ad4ad081a0 done
+     Copying blob a3ed95caeb02 skipped: already exists
+     Copying blob a3ed95caeb02 skipped: already exists
+     Copying blob 6c3fa2eab854 done
+     Copying blob baa6c6a394a8 done
+     Copying blob d3bd6757e62f done
+     Copying blob 793334d30848 done
+     Copying blob 45478159ff78 done
+     Copying blob 2dc39fad31f1 done
+     Copying blob de9425f428e6 done
+     Copying blob a9f8b223286e done
+     Copying blob a21d8705375b done
+     Copying blob cd03e39ea2d8 done
+     Copying blob 5977181856e9 done
+     Copying blob 9e13563da15f done
+     Copying blob 43bef9d36412 done
+     Copying blob 716461d330c0 done
+     Copying config ab326358e0 done
+     Writing manifest to image destination
+     Storing signatures
+     2020/04/28 08:17:25  info unpack layer: sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
+     2020/04/28 08:17:25  info unpack layer: sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
+     2020/04/28 08:17:25  info unpack layer: sha256:44a921a97b90f803acd1fafaa740f072f560e4c1a8697046135e3349d8e1c44e
+     2020/04/28 08:17:34  info unpack layer: sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
+     2020/04/28 08:17:34  info unpack layer: sha256:41a3cfb403b39757736a85997d6bbdeb7a0fd6b70a04391427e4900be65b1104
+     2020/04/28 08:17:37  info unpack layer: sha256:cbb895a342ea5489d4c7338ffafd9f134bc2af71e9c96aa8c532ec4219429f86
+     2020/04/28 08:17:37  info unpack layer: sha256:e0ad4ad081a054a80170183ea5820b709a60bc9cec8cf0ce5b601b4a982a773c
+     2020/04/28 08:17:37  info unpack layer: sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
+     2020/04/28 08:17:37  info unpack layer: sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
+     2020/04/28 08:17:37  info unpack layer: sha256:6c3fa2eab8540a6e21bf9a68ea968b38d4101ed4f5038da75c8fc70a96bd9456
+     2020/04/28 08:17:53  info unpack layer: sha256:baa6c6a394a8e5ad9fa13239a193307d30a5106c53b0e52cfe2383ad48bf1439
+     2020/04/28 08:17:53  info unpack layer: sha256:d3bd6757e62f5b7d09f244cfbb2608edd958c301452ed7223c693e16913deabb
+     2020/04/28 08:17:53  info unpack layer: sha256:793334d308489580b07bbdbeb6498a7cf4918ba195af293c010727295d8ea1c2
+     2020/04/28 08:17:53  info unpack layer: sha256:45478159ff786357f8429e038e875d64699f0f4435b548a02ebb20da9e55469e
+     2020/04/28 08:17:54  info unpack layer: sha256:2dc39fad31f145148516deaf8bbddafb6e0dfa43094479d897a832bf3c786e8a
+     2020/04/28 08:17:54  info unpack layer: sha256:de9425f428e6f1c7b9447357c5fa717138d540e9b82d7f2cfe978c9f8bafe674
+     2020/04/28 08:17:55  info unpack layer: sha256:a9f8b223286ecbc307e1ca958a8c63982ac334cae8f7a290afdbe6f6e5b1ac92
+     2020/04/28 08:17:55  info unpack layer: sha256:a21d8705375b6b59ff6fe0f93b314adcf15c8550d7302f25feff918443b12c92
+     2020/04/28 08:17:56  info unpack layer: sha256:cd03e39ea2d86ab1413b4ef25e46173c61ce3490dc4b8cdbc8a3ff09eb16b83a
+     2020/04/28 08:18:21  info unpack layer: sha256:5977181856e9d4e1b6aaa604d728fba1194f2d369ba330efe008786d1fd4c0a2
+     2020/04/28 08:18:21  info unpack layer: sha256:9e13563da15f861e7f3f0ded381892ce9bcd0e58651c6208e91870f4763b8a49
+     2020/04/28 08:18:21  info unpack layer: sha256:43bef9d36412441c505cfa1c73db643ce11309995fdc6cfdd33672906d33251b
+     2020/04/28 08:18:21  info unpack layer: sha256:716461d330c0217dbbf0b0ac44c16b03cd3e8dbcba5a4b8496da675420023c04
+     INFO:    Creating SIF file...
+     INFO:    Build complete: pdflatex.sif
+</blockquote>
+
+>
+>     cent7a(SLAC)$ singularity shell pdflatex.sif
 >     INFO:    Convert SIF file to sandbox...
 >     Singularity> pdflatex --version
 >     pdfTeX 3.14159265-2.6-1.40.15 (TeX Live 2014)
@@ -575,8 +633,8 @@ For example, you can use sklearn containers.
 > 
 > 
 > ``` 
-> lxplus$  singularity pull sklearn.sif docker://fastgenomics/sklearn:0.19.1-p36-v5
-> lxplus$  singularity shell sklearn.sif
+> cent7a(SLAC)$  singularity pull sklearn.sif docker://fastgenomics/sklearn:0.19.1-p36-v5
+> cent7a(SLAC)$  singularity shell sklearn.sif
 > Singularity> python3
 > >>> import sklearn  
 > >>> import pandas   
@@ -588,7 +646,7 @@ Atlas also provides machine learning containers on CVMFS:
 
 > 
 > 
->     lxplus$ ls /cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlasml
+>     cent7a(SLAC)$ ls /cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlasml
 >     
 >     atlasml-base:latest    ml-base:centos           ml-base:py-3.6.8
 >     atlasml-base:py-3.6.8  ml-base:centos-py-3.6.8  ml-base:py-3.7.2
@@ -628,7 +686,7 @@ For example, start a centos7 container with ALRB setup:
 
 > 
 > 
->     lxplus$ setupATLAS  -c centos7
+>     cent7a(SLAC)$ setupATLAS  -c centos7
 >     ------------------------------------------------------------------------------
 >     Singularity: 3.5.3
 >     From: /usr/bin/singularity
@@ -672,7 +730,7 @@ and **+nocvmfs** after the image location/keyword:
 
 > 
 > 
->     lxplus$ setupATLAS  -c centos7+noalrb+nocvmfs
+>     cent7a(SLAC)$ setupATLAS  -c centos7+noalrb+nocvmfs
 >     ------------------------------------------------------------------------------
 >     Singularity: 3.5.3
 >     From: /usr/bin/singularity
@@ -686,7 +744,7 @@ with tag **+noalrb** after the mage location/keyword:
 
 > 
 > 
->     lxplus$ setupATLAS -c library://ubuntu+noalrb
+>     cent7a(SLAC)$ setupATLAS -c library://ubuntu+noalrb
 >     INFO:    Convert SIF file to sandbox...
 >     INFO:    Cleaning up image...
 >     ------------------------------------------------------------------------------
@@ -712,15 +770,15 @@ add this mount point to the CVMFS client on your computer.
 
 > 
 > 
->     lxplus$ ls /cvmfs/unpacked.cern.ch/
+>     cent7a(SLAC)$ ls /cvmfs/unpacked.cern.ch/
 >     gitlab-registry.cern.ch  logDir  registry.hub.docker.com
 >     
->     lxplus$ ls /cvmfs/unpacked.cern.ch/registry.hub.docker.com/
+>     cent7a(SLAC)$ ls /cvmfs/unpacked.cern.ch/registry.hub.docker.com/
 >     atlas        atlasml   cmssw      jodafons  lofaruser      siscia
 >     atlasadc     atlrpv1l  danikam    kratsg    lukasheinrich  stfc
 >     atlasamglab  clelange  engineren  library   pyhf           sweber613
 >     
->     lxplus$ ls /cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlasml
+>     cent7a(SLAC)$ ls /cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlasml
 >     atlasml-base:latest    ml-base:centos           ml-base:py-3.6.8
 >     atlasml-base:py-3.6.8  ml-base:centos-py-3.6.8  ml-base:py-3.7.2
 >     atlasml-base:py-3.7.2  ml-base:centos-py-3.7.2
@@ -732,7 +790,7 @@ machine learning. For Atlas release containers, they are under
 
 > 
 > 
->     lxplus$ ls /cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlas
+>     cent7a(SLAC)$ ls /cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlas
 >     analysisbase:21.2.10            athanalysis:21.2.102
 >     analysisbase:21.2.100           athanalysis:21.2.10-20171115
 >     [...]
@@ -757,7 +815,7 @@ Let us take an example of release AthAnalysis,2.2.115 under
 
 > 
 > 
->     lxplus$ singularity exec -c /cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlas/athanalysis:21.2.115/release_setup.sh bash
+>     cent7a(SLAC)$ singularity exec -c /cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlas/athanalysis:21.2.115/release_setup.sh bash
 >     singularity exec -c /cvmfs/unpacked.cern.ch/registry.hub.docker.com/atlas/athanalysis:21.2.115 bash
 >     Singularity> ls /home/atlas
 >     release_setup.sh
