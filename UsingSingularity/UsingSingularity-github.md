@@ -257,7 +257,7 @@ You can find the Singularity usage by running **singularity -h**
 <details>
 
 <summary>cent7a(SLAC)$ singularity -h</summary>
-<blockquote><pre>
+<blockquote>
 Linux container platform optimized for High Performance Computing (HPC) and
 Enterprise Performance Computing (EPC)
 
@@ -312,7 +312,7 @@ Examples:
 
 
 For additional help or support, please visit https://www.sylabs.io/docs/
-</pre></blockquote>
+</blockquote>
 </details>
 
 
